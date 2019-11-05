@@ -244,7 +244,8 @@ function validate() {
 
 var listImage = [];
 
-$("#Images").change(function (e) {
+
+$("#Images").on('input', function (e) {
     // listImage = [];
     chindex = 0;
     var myfiles = document.getElementById("Images").files;
@@ -257,8 +258,6 @@ $("#Images").change(function (e) {
     debugger;
 
     if (myfiles.length > 0) {
-        if (myfiles.length < 20) { // kiểm tra số lượng file tối đa được chọn là 25
-            
             for (i = 0; i < myfiles.length; i++) {
                 listImage.push(myfiles.item(i));
                 if (myfiles[i].type.match(imageType)) {   //image file.
@@ -267,13 +266,20 @@ $("#Images").change(function (e) {
                         var tagA = document.createElement("a");
                         tagA.href = event.target.result;
                         var image = new Image();
+                        image.onload = function () {
+                            console.debug(this.width, this.height);
+                            var canvas = document.createElement('canvas'), ctx;
+                            canvas.width = 188;
+                            canvas.height = 150;
+                            document.body.appendChild(canvas);
+                            ctx = canvas.getContext('2d');
+                            ctx.drawImage(image, 0, 0, 188, 150);
+                        };
                         image.src = event.target.result;
                         //add new
                         image.className = "listImage"
-                        //  image.height = 345;
-                        //  image.width = 520;
-                        image.height = 50;
-                        image.width = 50;
+                        image.height = 345;
+                        image.width = 520;                    
                         image.id = temp;
                         tagA.appendChild(image);
                         var divContainer = document.createElement("div");
@@ -294,18 +300,18 @@ $("#Images").change(function (e) {
                         var tagLabel = document.createElement("lable");
                         tagLabel.innerHTML = myfiles[i].name;
                         tagLabel.style.fontWeight = "bold";
-                        //viewImages.appendChild(divContainer);
                         viewImages.appendChild(tagLabel);
                     }
                 }
             }
         }
-    } else {
-        alert("The number of photos cannot exceed 10 , please choose agian ! ");
-    }
-    if (CheckFile()) {
-        viewImages.innerHTML = "";
-    };
+ 
+   setTimeout(function () {
+        if (CheckFile()) {
+            viewImages.innerHTML = "";
+        };
+    }, 800);
+   
     
 });
 
@@ -319,18 +325,17 @@ function CheckFile() {
         }
         if (i == listImage.length - 1) {
             alert("Có " + tempp + " File khả dụng ,Tổng " + (SizeAll / 1048576).toFixed(2) + "MB")
-            // tổng số dung lượng lượng ảnh vượt quá 10mb thì thông báo và không cho insert 
-            if ((SizeAll / 1048576).toFixed(2) > 15) {               
+            // tổng số dung lượng lượng ảnh vượt quá 30mb thì thông báo và không cho insert            
+            if ((SizeAll / 1048576).toFixed(2) > 30) {               
                 //alert("can't not insert because Size All Image > 10mb");
                 listImage = [];
-                $("#Images").val(null);
-               // $("#viewImages").empty();
-                var node = document.getElementById('viewImages');
-                while (node.hasChildNodes()) {
-                    node.removeChild(node.firstChild);
-                }
+                $("#Images").val(null);            
                 return true;
-            } else {
+            } else if (tempp > 15) {
+                // Không cho số file khả dụng vượt quá số lượng 15
+                return false;
+            }
+            else {
                 return false;
             }
         }
@@ -339,7 +344,6 @@ function CheckFile() {
 
 
 var elements;
-
 var listDelete = [];
 function removeIndexImage(index) {
     //kiểm tra tổng dung lượng file
