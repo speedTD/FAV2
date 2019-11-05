@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "HistorySearch";
+}
+
+<section class="content">
+    <style>
+        .row {
+            margin: 0px;
+            padding: 0px;
+        }
+    </style>
+    <!-- Display grid, CRUD button -->
+    <form class="form-horizontal">
+        <div class="row">
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <h2>Select Searching Information</h2>
+                </div>
+                <div class="col-md-6 form-group" style="margin-top: 10px;">
+                    <div class="col-md-4">
+                        <label><input type="checkbox" value="">From Date</label>
+                        <input class="datepicker form-control" id="FromDate" data-date-format="mm/dd/yyyy" data-provide="datepicker">
+                    </div>
+                    <div class="col-md-4">
+                        <label><input type="checkbox" value="">To Date</label>
+                        <input class="datepicker form-control" id="ToDate" data-date-format="mm/dd/yyyy" data-provide="datepicker">
+                    </div>
+                    <div class="col-md-4">
+                        <label><input type="checkbox" value="">Expire Date</label>
+                        <input class="datepicker form-control" id="ExpireDate" data-date-format="mm/dd/yyyy" data-provide="datepicker">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 form-group">
+                    <div class="col-md-3">
+                        <label for="ToolID" class="col-sm-3 col-form-label">ToolID</label>
+                        <input type="text" class="form-control" id="ToolID" placeholder="ToolID">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="Item" class="col-sm-3 col-form-label">Item</label>
+                        <input type="text" class="form-control" id="Item" placeholder="Item">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="Line" class="col-sm-3 col-form-label">Line</label>
+                        <input type="text" class="form-control" id="Line" placeholder="Line">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="Maker" class="col-sm-3 col-form-label">Maker</label>
+                        <input type="text" class="form-control" id="Maker" placeholder="Maker">
+                    </div>
+                </div>
+                <div class="col-md-4 form-group modal-footer" style="margin-top:8px;">
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-primary" style="width : 130px;" id="btnSearch" onclick="return Search();">Search</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-primary" id="btnClearSearchItem" onclick="return ClearSearchItem();">Clear Search Item</button>
+                    </div>
+                </div>
+            </div>
+
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr class="bg-light-blue color-palette text-center">
+                        <th>
+                            ToolID
+                        </th>
+                        <th>
+                            Item
+                        </th>
+                        <th>
+                            Line
+                        </th>
+                        <th>
+                            Marker
+                        </th>
+                        <th>
+                            ExpireDate
+                        </th>
+                    </tr>
+
+                </thead>
+                <tbody class="tbody"></tbody>
+            </table>
+        </div>
+    </form>
+</section>
+@*<script src="~/Scripts/jquery-3.0.0.min.js"></script>*@
+<script src="~/Scripts/Common/SM_Common.js"></script>
+<script src="~/Scripts/ToolHistory/HistorySearch.js?v=@DateTime.Now.ToString("yyMMddHHssmm")"></script>
+

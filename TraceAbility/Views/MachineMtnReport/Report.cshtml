@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Report</h2>
+<input type="button" onclick="createReport()" >
+
+<script src="~/Scripts/Common/SM_Common.js"></script>
+<script src="~/Scripts/MachineMtnWeekMonthYear/MachineMtnReportData.js?v=@DateTime.Now.ToString("yyMMddHHssmm")"></script>

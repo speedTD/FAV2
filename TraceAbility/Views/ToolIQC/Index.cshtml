@@ -1,0 +1,172 @@
+﻿@{
+    ViewBag.Title = "Index";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="content">
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Tool IQC</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="clearTextBox();">
+                    <i class="fa fa-plus"></i>
+                    <span>Add New</span>
+                </button>
+            </div>
+        </div>
+        <div class="box-body">
+            <!-- Table -->
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 col-xs-12">
+                    <div class="table-responsive no-padding">
+                        <table class="table table-bordered table-hover myTable" style="width:100%">
+                            <thead>
+                                <tr class="bg-light-blue color-palette text-center">
+                                    <th style="display:none">
+                                        ID
+                                    </th>
+                                    <th>
+                                        ToolType
+                                    </th>
+                                    <th>
+                                        PrefixToolID
+                                    </th>
+                                    <th>
+                                        FromToolID
+                                    </th>
+                                    <th>
+                                        ToToolID
+                                    </th>
+                                    <th>
+                                        FileUrl
+                                    </th>
+                                    <th>
+                                        CreatedDate
+                                    </th>
+                                    <th>
+                                        OperatorID
+                                    </th>
+                                    <th>
+                                        Action
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"></button>
+                <h4 class="modal-title" id="myModalLabel">Add new Tool IQC</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group row" style="display:none;">
+                                <label for="ID" class="col-sm-3 col-form-label">ID</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="ID" placeholder="ID">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="ID" class="col-sm-3 col-form-label">File upload</label>
+                                <div class="col-sm-9">
+                                    <input type="file" id="FileUpload" class="upld-file" on>
+                                </div>
+                            </div>
+
+                            <div class="form-group row" style="display:none;">
+                                <label for="ID" class="col-sm-3 col-form-label">ID</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="ID" placeholder="ID">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="ToolType" class="col-sm-3 col-form-label">ToolType</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" id="ToolType"></select>
+                                </div>
+
+
+                            </div>
+                            <div class="form-group row">
+                                <label for="PrefixToolID" class="col-sm-3 col-form-label">PrefixToolID</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="PrefixToolID" placeholder="PrefixToolID">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="FromToolID" class="col-sm-3 col-form-label">FromToolID</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="FromToolID" placeholder="FromToolID">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="ToToolID" class="col-sm-3 col-form-label">ToToolID</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="ToToolID" placeholder="ToToolID">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="FileUrl" class="col-sm-3 col-form-label">FileUrl</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="FileUrl" placeholder="FileUrl" readonly="readonly">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="FileUrl" class="col-sm-3 col-form-label"></label>
+                                <div class="col-sm-9">
+                                    <a href="" id="FileUrl_DownloadLink" download></a>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="CreatedDate" class="col-sm-3 col-form-label">CreatedDate</label>
+                                <div class="col-sm-9">
+                                    <input class="datepicker form-control" id="CreatedDate" data-date-format="mm/dd/yyyy" data-provide="datepicker">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="OperatorID" class="col-sm-3 col-form-label">OperatorID</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="OperatorID" value='' placeholder="OperatorID">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="FactoryID" class="col-md-3 control-label">FactoryID</label>
+                                <div class="col-md-9">
+                                    <select name="dropdown" id="FactoryID" class="form-control">
+                                        <option value="F1" selected>F1</option>
+                                        <option value="F2">F2</option>
+                                        <option value="F3">F3</option>
+                                        <option value="F4">F4</option>
+                                        <option value="F5">F5</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnAdd" onclick="return ToolIQC_Insert();">Save</button>
+                <button type="button" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="ToolIQC_Update();">Update</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/Common/SM_Common.js"></script>
+<script src="~/Scripts/ToolIQC/ToolIQC.js?v=@DateTime.Now.ToString("yyMMddHHssmm")"></script>
+
+

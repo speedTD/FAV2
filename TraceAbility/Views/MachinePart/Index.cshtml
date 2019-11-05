@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<section class="content">
+    @*<link href="~/Content/DataTables/datatables.min.css" rel="stylesheet" />*@
+    <!-- Display grid, CRUD button -->
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Bộ Phận Máy/Machine Part</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="clearTextBox();">
+                    <i class="fa fa-plus"></i>
+                    <span>Add New</span>
+                </button>
+            </div>
+        </div>
+        <div class="box-body">
+
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 col-xs-12">
+                    <table id="tblMachinePart" class="table table-bordered table-hover myTable">
+                        <thead>
+                            <tr class="bg-light-blue color-palette text-center">
+                                <th>
+                                    ID
+                                </th>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Description
+                                </th>
+                                <th>
+                                    MachineType
+                                </th>
+                                <th>
+                                    Action
+                                </th>
+                            </tr>
+
+                        </thead>
+                        <tbody class="tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"></button>
+                            <h4 class="modal-title" id="myModalLabel">Thêm bộ phận máy/Add new MachinePart</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group row">
+                                            <label for="Name" class="col-sm-3 col-form-label">Name</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="Name" placeholder="Name">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="Description" class="col-sm-3 col-form-label">Description</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="Description" placeholder="Description">
+                                            </div>
+                                        </div>
+                                        @*<div class="form-group row">
+                                                <label for="MachineType" class="col-sm-3 col-form-label">MachineType</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" id="MachineType" placeholder="MachineType">
+                                                </div>
+                                            </div>*@
+                                        <div class="form-group row">
+                                            <label for="MachineType" class="col-sm-3 col-form-label">MachineType</label>
+                                            <div class="col-sm-9">
+                                                <select name="dropdown" id="MachineType" class="form-control"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="btnAdd" onclick="return InsertMachinePart();">Save</button>
+                            <button type="button" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="UpdateMachinePart();">Update</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+</div>
+</section>
+
+<script src="~/Scripts/Common/SM_Common.js"></script>
+<script src="~/Scripts/MachinePart/MachinePart.js?v=@DateTime.Now.ToString("yyMMddHHssmm")"></script>
+

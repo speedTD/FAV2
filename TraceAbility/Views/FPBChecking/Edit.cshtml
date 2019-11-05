@@ -1,0 +1,130 @@
+﻿@model TestABC.Models.Data.PermisionControllerVM
+@{
+    ViewBag.Title = "Edit";
+}
+<section class="content">
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Thông tin FPB Checking</h3>
+        </div>
+        <div class="box-body">
+            <form enctype="multipart/form-data">
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    <div class="col-xs-6 col-sm-3 col-lg-2">
+                        <div class="form-group">
+                            <label for="IndicationNo">Indication No</label>
+                            <input type="text" class="form-control" id="IndicationNo" placeholder="IndicationNo">
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-3 col-lg-2">
+                        <div class="form-group">
+                            <label for="ItemCode">Item Code</label>
+                            <input type="text" class="form-control" id="ItemCode" placeholder="ItemCode">
+                            @*<select class="form-control" id="ItemCode"></select>*@
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-3 col-lg-2">
+                        <div class="form-group">
+                            <label for="ItemName">Item Name</label>
+                            <input type="text" class="form-control" disabled id="ItemName" placeholder="ItemName">
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-3 col-lg-2">
+                        <div class="form-group">
+                            <label for="BatchNo">Batch No</label>
+                            <input type="text" class="form-control" id="BatchNo" placeholder="BatchNo">
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-3 col-lg-2">
+                        <div class="form-group">
+                            <label for="BlockID">BlockID</label>
+                            <input type="text" class="form-control" id="BlockID" placeholder="BlockID">
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-3 col-lg-2">
+                        <div class="form-group">
+                            <label for="SeqNo">Seq No.</label>
+                            <input type="text" class="form-control" id="SeqNo" placeholder="SeqNo">
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-3 col-lg-2">
+                        <div class="form-group">
+                            <label for="MachineID">Machine ID</label>
+                            <input type="text" class="form-control" id="MachineID" placeholder="">
+                            @*<select class="form-control" id="MachineID"></select>*@
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-3 col-lg-2">
+                        <div class="form-group">
+                            <label for="MachineName">Machine Name</label>
+                            <input type="text" class="form-control" disabled id="MachineName" placeholder="MachineName">
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-3 col-lg-2">
+                        <div class="form-group">
+                            <label for="FPBCheckingDate">Date Time</label>
+                            <input class="datepicker form-control" id="FPBCheckingDate" data-date-format="mm/dd/yyyy" data-provide="datepicker">
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-3 col-lg-2">
+                        <div class="form-group">
+                            <label for="UserID">Operator</label>
+                            <input type="text" class="form-control" disabled id="UserID" placeholder="UserID">
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-3 col-lg-2">
+                        <div class="form-group">
+                            @*<label for="Result">Result</label>
+                            <div class="col-md-6">
+                                <input type="radio" name="Result" value="OK"> OK
+                            </div>
+                            <div class="col-md-6">
+                                <input type="radio" name="Result" value="NG"> NG
+                            </div>*@
+                            <div class="form-group">
+                                <label for="Result">Result</label><br />
+                                <label class="radio-inline"><input type="radio" name="Result" value="OK">OK</label>
+                                <label class="radio-inline"><input type="radio" name="Result" value="NG">NG</label>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-lg-6">
+                        <div class="form-group">
+                            <label for="Result">Choose file</label>
+                            <input type="file" class="form-control" id="Images" placeholder="Upload" multiple="multiple" name="Images">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-lg-6">
+                        <div class="form-group">
+                            <label for="Result">&nbsp;</label>
+                            <div id="imgalign">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <div id="viewImages"></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="box-footer">
+            @*<button type="button" class="btn btn-primary" id="btnAdd" onclick="return InsertFPBChecking();">Update</button>*@
+            <a href="/FPBChecking/Index" class="btn btn-default">Close</a>
+        </div>
+        
+    </div>
+    
+</section>
+
+<script src="~/Scripts/Common/SM_Common.js"></script>
+<script src="~/Scripts/FPBChecking/FPBCheckingEdit.js?v=@DateTime.Now.ToString("yyMMddHHssmm")"></script>
+

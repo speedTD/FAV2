@@ -1,0 +1,126 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="content">
+    <!-- Display grid, CRUD button -->
+    <div class="row" style="overflow-x: scroll;">
+        <div class="col-xs-12">
+            <h2> Production List</h2>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="clearTextBox();">Add New Production List</button><br /><br />
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr  class="bg-light-blue color-palette text-center">
+                        <th>
+                            IndicatorID
+                        </th>
+                        <th>
+                            ItemName
+                        </th>
+                        <th>
+                            ItemCode 
+                        </th>
+                        <th>
+                            BatchNo
+                        </th>
+                        <th>
+                            ProgramName
+                        </th>
+                        <th>
+                            Line
+                        </th>
+                        <th>
+                            MachineTypeName
+                        </th>
+                        <th>
+                            PatternCode
+                        </th>
+                        <th>
+                            Action
+                        </th>
+                    </tr>
+
+                </thead>
+                <tbody class="tbody"></tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" style="width:50%">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"></button>
+                    <h4 class="modal-title" id="myModalLabel">Add new Condition Setting</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group row">
+                                    <label for="IndicatorID" class="col-sm-3 col-form-label">IndicatorID</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="IndicatorID" placeholder="IndicatorID">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="ItemName" class="col-sm-3 col-form-label">Item Name</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="ItemName" placeholder="ItemName">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="ItemCode" class="col-sm-3 col-form-label">Item Code</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="ItemCode" placeholder="ItemCode">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="BatchNo" class="col-sm-3 col-form-label">Batch No</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="BatchNo" placeholder="BatchNo">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="ProgramName" class="col-sm-3 col-form-label">Program Name</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="ProgramName" placeholder="ProgramName">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="LineID" class="col-sm-3 col-form-label">Line</label>
+                                    <div class="col-sm-5">
+                                        <select class="form-control" id="LineID"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="MachineTypeID" class="col-sm-3 col-form-label">MachineTypeID</label>
+                                    <div class="col-sm-5">
+                                        <select class="form-control" id="MachineTypeID"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="PatternCode" class="col-sm-3 col-form-label">Pattern Code</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="PatternCode" placeholder="PatternCode">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btnAdd" onclick="return InsertProductionList();">Save</button>
+                    <button type="button" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="UpdateProductionList();">Update</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@*<script src="~/Scripts/jquery-3.0.0.min.js"></script>*@
+<script src="~/Scripts/Common/SM_Common.js"></script>
+<script src="~/Scripts/ProductionList/ProductionList.js?v=@DateTime.Now.ToString("yyMMddHHssmm")"></script>
+
+

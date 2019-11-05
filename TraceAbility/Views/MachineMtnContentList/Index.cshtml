@@ -1,0 +1,323 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<section class="content">
+
+    <link href="~/Content/bootstrap-toggle.min.css" rel="stylesheet" />
+    <!-- Display grid, CRUD button -->
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Danh mục nội dung bảo trì máy/Machine maintenance content list</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ImportExcelModal" onclick="">
+                    <span>Import Excel</span>
+                </button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="Add();">
+                    <i class="fa fa-plus"></i>
+                    <span>Add New</span>
+                </button>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-xs-6 col-sm-3 col-lg-2">
+                </div>
+                <div class="col-xs-6 col-sm-3 col-lg-2">
+                </div>
+                <div class="col-xs-6 col-sm-3 col-lg-2">
+                </div>
+                <div class="col-xs-6 col-sm-3 col-lg-2">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-sm-3 col-lg-2">
+                    <div class="form-group">
+                        <label for="SearchMachineType">Machine Type</label>
+                        <select name="dropdown" id="SearchMachineType" placeholder="SearchMachineType" class="form-control"></select>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-3 col-lg-2">
+                    <div class="form-group">
+                        <label for="SearchMachinePart">Machine Part	</label>
+                        <input type="text" class="form-control" id="SearchMachinePart" placeholder="SearchMachinePart">
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-3 col-lg-2">
+                    <div class="form-group">
+                        <label for="SearchContentMaintenance">Content Maintenance</label>
+                        <input type="text" class="form-control" id="SearchContentMaintenance" placeholder="SearchContentMaintenance">
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-3 col-lg-2">
+                    <div class="form-group">
+                        <label for="SearchToolMaintenance">Tool Maintenance</label>
+                        <input class="form-control" id="SearchToolMaintenance" placeholder="SearchToolMaintenance">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-sm-3 col-lg-2">
+                    <div class="form-group">
+                        <label for="SearchMethodMaintenance">Method Maintenance</label>
+                        <input type="text" class="form-control" id="SearchMethodMaintenance" placeholder="SearchMethodMaintenance">
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-3 col-lg-2">
+                    <div class="form-group">
+                        <label for="SearchFrequencyID">FrequencyID</label>
+                        <select name="dropdown" id="SearchFrequencyID" class="form-control" style="border-color: lightgrey;"></select>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-3 col-lg-2">
+                    <div class="form-group">
+                        <label for="btnSearch">&nbsp;</label>
+                        <button type="button" class="btn btn-primary form-control" id="btnSearch" onclick="return MachineMtnContent_Search(1);">&nbsp;&nbsp;Search&nbsp;</button>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-3 col-lg-2">
+                    <div class="form-group">
+                        <label for="btnSearch">&nbsp;</label>
+                        <button type="button" class="btn btn-primary form-control" id="btnClearSearchItem" onclick="return clearSearchTextBox();">Clear Search</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 col-xs-12">
+                    <div class="table-responsive no-padding">
+                        <table class="table table-striped table-bordered table-hover myTable">
+                            <thead>
+                                <tr class="bg-light-blue color-palette text-center">
+                                    <th class="text-center text"->
+                                        Machine Type
+                                    </th>
+                                    <th class="text-center">
+                                        Machine Part
+                                    </th>
+                                    <th class="text-center">
+                                        Content Maintenance
+                                    </th>
+                                    <th class="text-center">
+                                        Tool Maintenance
+                                    </th>
+                                    <th class="text-center">
+                                        Method Maintenance
+                                    </th>
+                                    <th class="text-center">
+                                        Standard
+                                    </th>
+                                    <th class="text-center">
+                                        FrequencyID
+                                    </th>
+                                    <th class="text-center">
+                                        Min
+                                    </th>
+                                    <th class="text-center">
+                                        Max
+                                    </th>
+                                    <th class="text-center">
+                                        Active Status
+                                    </th>
+                                    <th class="text-center">
+                                        Action
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row"> 
+                <div class="col-xs-12 text-center" id="page-selection">
+                </div>
+            </div>
+        </div>
+    </div>
+  
+</section>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"></button>
+                <h4 class="modal-title" id="myModalLabel"> Thêm nội dung bảo trì/Add new machine maintenance content list</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group row">
+                                <label for="MachineTypeID" class="col-sm-3 col-form-label">Machine Type</label>
+                                <div class="col-sm-9">
+                                    <select name="dropdown" id="MachineTypeID" class="form-control"></select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="MachinePartID" class="col-sm-3 col-form-label">Machine Part</label>
+                                <div class="col-sm-9">
+                                    <select name="dropdown" id="MachinePartID" class="form-control"></select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="ContentMtn" class="col-sm-3 col-form-label">Content Maintenance</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="ContentMtn" placeholder="ContentMtn">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="ToolMtn" class="col-sm-3 col-form-label">Tool Maintenance</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="ToolMtn" placeholder="ToolMtn">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="MethodMtn" class="col-sm-3 col-form-label">Method Maintenance</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="MethodMtn" placeholder="MethodMtn">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="MethodMtn" class="col-sm-3 col-form-label">Standard</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="Standard" placeholder="MethodMtn">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="FrequencyID" class="col-sm-3 col-form-label">FrequencyID</label>
+                                <div class="col-sm-9">
+                                    <select name="dropdown" id="FrequencyID" class="form-control"></select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="IsActive" class="col-sm-3 col-form-label">IsActive</label>
+                                <div class="col-sm-9">
+                                    <select name="dropdown" id="IsActive" class="form-control"></select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="Min" class="col-sm-3 col-form-label">Min</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="Min" placeholder="Min">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="Max" class="col-sm-3 col-form-label">Max</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="Max" placeholder="Max">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnAdd" onclick="return InsertMachineMtnContentList();">Insert</button>
+                <button type="button" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="UpdateMachineMtnContentList();">Update</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--region Import Excel modal -->
+<div class="modal fade" id="ImportExcelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"></button>
+                <h4 class="modal-title" id="myModalLabel"> Nhập file excel nội dung bảo trì/Import Machine Maintanence Content file</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group row">
+                                <label for="MachineType" class="col-sm-3 col-form-label">Machine Type</label>
+                                <div class="col-sm-9">
+                                    <select name="dropdown" id="drpMachineType" class="form-control"></select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">Tần suất bảo dưỡng</label>
+                                <div class="col-md-8">
+                                    <a href="~/Document_TraceMachine/Template/templateMachinemaintenance_ContentList.xlsx">File import template.</a>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Hàng ngày</label>
+                                <div class="col-md-7">
+                                    <input type="file" id="ChooseFileDaily" class="upld-file">
+                                </div>
+                                <div class="col-md-2 text-right">
+                                    <button type="button" class="btn btn-primary" id="btnAdd" onclick="return ImportMachineMtnContentListByType('Daily');">Import</button>   @*ma kieu bao cao*@
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Hàng tuần</label>
+                                <div class="col-md-7">
+                                    <input type="file" id="ChooseFileWeekly" class="upld-file">
+                                </div>
+                                <div class="col-md-2 text-right">
+                                    <button type="button" class="btn btn-primary" id="btnAdd" onclick="return ImportMachineMtnContentListByType('Weekly');">Import</button>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Hàng tháng</label>
+                                <div class="col-md-7">
+                                    <input type="file" id="ChooseFileMonthly" class="upld-file">
+                                </div>
+                                <div class="col-md-2 text-right">
+                                    <button type="button" class="btn btn-primary" id="btnAdd" onclick="return ImportMachineMtnContentListByType('Monthly');">Import</button>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">3 tháng</label>
+                                <div class="col-md-7">
+                                    <input type="file" id="ChooseFile3Months" class="upld-file">
+                                </div>
+                                <div class="col-md-2 text-right">
+                                    <button type="button" class="btn btn-primary" id="btnAdd" onclick="return ImportMachineMtnContentListByType('3Months');">Import</button>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">6 tháng</label>
+                                <div class="col-md-7">
+                                    <input type="file" id="ChooseFile6Months" class="upld-file">
+                                </div>
+                                <div class="col-md-2 text-right">
+                                    <button type="button" class="btn btn-primary" id="btnAdd" onclick="return ImportMachineMtnContentListByType('6Months');">Import</button>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Hàng năm</label>
+
+                                <div class="col-md-7">
+                                    <input type="file" id="ChooseFileYearly" class="upld-file">
+                                </div>
+                                <div class="col-md-2 text-right">
+                                    <button type="button" class="btn btn-primary" id="btnAdd" onclick="return ImportMachineMtnContentListByType('Yearly');">Import</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                @*<button type="button" class="btn btn-primary" id="btnAdd" onclick="return InsertMachineMtnFrequencyList();">Insert</button>*@
+                @*<button type="button" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="UpdateMachine();">Update</button>*@
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/bootstrap-toggle.min.js"></script>
+<script src="~/Scripts/Common/SM_Common.js"></script>
+<script src="~/Scripts/MachineMtnContentList/MachineMtnContentList.js?v=@DateTime.Now.ToString("yyMMddHHssmm")"></script>
+
+
+
+

@@ -1,0 +1,241 @@
+﻿
+@{
+    ViewBag.Title = "ToolCleaningContent";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="content">
+    <!-- Display grid, CRUD button -->
+    <div class="row">
+        <div class="col-xs-12">
+            <h2>Tool Cleaning Content</h2>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="AddNew_CleaningInfo();">Add Cleaning Content</button><br /><br />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-2">
+            <div class="form-group">
+                <label for="SearchToolID">SearchToolID</label>
+                <input type="text" class="form-control" id="SearchToolID" placeholder="SearchToolID">
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <div class="form-group">
+                <label for="SearchLine">Line</label>
+                <input type="text" class="form-control" id="SearchLine" placeholder="SearchLine">
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <div class="form-group">
+                <label for="SearchResult ">Result </label>
+                <input type="text" class="form-control" id="SearchResult " placeholder="SearchResult ">
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <div class="form-group">
+                <label for="SearchCheckBy">CheckBy</label>
+                <input type="text" class="form-control" id="SearchCheckBy" placeholder="CheckBy">
+            </div>
+        </div>
+        <div class="col-xs-4">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-2">
+            <div class="form-group">
+                <label for="FromDate">From Date</label>
+                <input class="datepicker form-control" id="FromDate" data-date-format="mm/dd/yyyy" data-provide="datepicker">
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <div class="form-group">
+                <label for="ToDate">To Date</label>
+                <input class="datepicker form-control" id="ToDate" data-date-format="mm/dd/yyyy" data-provide="datepicker">
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <div class="form-group">
+                <label for="btnSearch">&nbsp;</label>
+                <button type="button" class="btn btn-primary form-control pull-left" id="btnSearch" onclick="return ToolCleaning_SearchToolCleaning(1);">&nbsp;&nbsp;Search&nbsp;</button>
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <div class="form-group">
+                <label for="btnSearch">&nbsp;</label>
+                <button type="button" class="btn btn-primary form-control pull-right" id="btnClearSearchItem" onclick="return ClearSearchItem();">Clear Search</button>
+            </div>
+        </div>
+        <div class="col-xs-4">
+        </div>
+    </div>
+    <div class="row" style="overflow-x: scroll;">
+        <div class="col-xs-12">
+             <table class="table table-bordered table-hover">
+                <thead>
+                    <tr  class="bg-light-blue color-palette text-center">
+                        <th>
+                            ToolID
+                        </th>
+                        <th>
+                            LineUsing
+                        </th>
+                        <th>
+                            Shift
+                        </th>
+                        <th>
+                            Result
+                        </th>
+                        <th>
+                            NGContents
+                        </th>
+                        <th>
+                            RepairDate
+                        </th>
+                        <th>
+                            RepairContents
+                        </th>
+                        <th>
+                            RepairID
+                        </th>
+                        <th>
+                            CheckBy
+                        </th>
+                        <th>
+                            ImageLink
+                        </th>
+                        <th>
+                            Action      
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="tbody"></tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 text-center" id="page-selection">
+        </div>
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"></button>
+                    <h4 class="modal-title" id="myModalLabel">Tool Cleaning Content</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row">
+                            <div class="col-sm-7">
+                                <div class="form-group row">
+                                    <label for="ToolID" class="col-sm-3 col-form-label">ToolID</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="ToolID" placeholder="ToolID" onkeyup="scanToolID_Cleaning(event)">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="LineUsing" class="col-sm-3 col-form-label">LineUsing</label>
+                                    <div class="col-sm-5">
+                                        <select class="form-control" id="LineUsing">
+                                        </select>
+                                     </div>
+                                    <div class="col-sm-4">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="Shift" class="col-sm-3 col-form-label">Shift</label>
+                                    <div class="col-sm-5">
+                                        <select class="form-control" id="Shift">
+                                            <option value="1">Shift 1</option>
+                                            <option value="2">Shift 2</option>
+                                            <option value="3">Shift 3</option>
+                                        </select>
+                                    </div>  
+                                    <div class="col-sm-4">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="Result" class="col-sm-3 col-form-label">Result</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="Result" placeholder="Result">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="NGContents" class="col-sm-3 col-form-label">NGContents</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="NGContents" placeholder="NGContents">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="RepairDate" class="col-sm-3 col-form-label">RepairDate</label>
+                                    <div class="col-sm-9">
+                                        <input class="datepicker form-control" id="RepairDate" data-date-format="mm/dd/yyyy" data-provide="datepicker">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="RepairContents" class="col-sm-3 col-form-label">RepairContents</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="RepairContents" placeholder="RepairContents">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="RepairID" class="col-sm-3 col-form-label">RepairID</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control" id="RepairID" placeholder="RepairID">
+                                    </div>
+                                    <div class="col-sm-4">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="CheckBy" class="col-sm-3 col-form-label">CheckBy</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control" id="CheckBy" placeholder="CheckBy">
+                                    </div>
+                                    <div class="col-sm-4">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group row">
+                                    <div class="col-sm-12">
+                                        <img src="" class="img-fluid" id="ImageLink" alt="">
+                                        <input type="file" id="ChooseImageFile" class="upld-file">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-7 text-center">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="chkKeepInfoAndAutoSave">
+                                    <label class="form-check-label" for="chkKeepInfoAndAutoSave">Keep information and auto save</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-5"></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-sm-3 text-left">
+                            <button type="button" class="btn btn-primary" id="btnClearInfo" onclick="clearTextBox();">Clear Info</button>
+                        </div>
+                        <div class="col-sm-4">
+                            <button type="button" class="btn btn-primary" id="btnSave" onclick="SaveToolCleaningInfo();">Save</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+                        <div class="col-sm-5">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" id="totalPage" />
+    <input type="hidden" id="ToolCleaningContentID" />
+</section>
+
+@*<script src="~/Scripts/bootstrap-datepicker.js"></script>*@
+<script src="~/Scripts/Common/SM_Common.js"></script>
+<script src="~/Scripts/ToolList/ToolCleaningContent.js?v=@DateTime.Now.ToString("yyMMddHHssmm")"></script>
+

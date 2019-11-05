@@ -1,0 +1,166 @@
+﻿@model TestABC.Models.Data.MenuViewModel
+@{
+    Layout = null;
+}
+<ul class="sidebar-menu" data-widget="tree">
+    <li class="header" style="color: white; font-size: 16px;">MENU NAVIGATION</li>
+
+    @foreach (var parentMenu in Model.returnMenuRole.lstMenuRole.Where(e => e.ParentMenuID == 0)) //list parent menu.
+    {
+        <li class="treeview" style="white-space : normal">
+            <a href="#">
+                @if (@parentMenu.DisplayName.ToLower().Contains("admin"))
+                {
+                    <i class='fa fa-group'></i>
+                }
+                else if (@parentMenu.DisplayName.ToLower().Contains("tool jig"))
+                {
+                    <i class='fa fa-compass'></i>
+                }
+                else if (@parentMenu.DisplayName.ToLower().Contains("production control"))
+                {
+                    <i class='fa fa-address-card'></i>
+                }
+                else if (@parentMenu.DisplayName.ToLower().Contains("machine maintenance"))
+                {
+                    <i class='fa fa-cogs'></i>
+                }
+                else
+                {
+                    <i class='fa fa-dashboard'></i>
+                }
+                <span>@(new HtmlString(@parentMenu.DisplayName.Replace("<br/>", "<br/><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>")))</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu" style="white-space : normal">
+                @foreach (var childMenu in Model.returnMenuRole.lstMenuRole.Where(e => e.ParentMenuID == parentMenu.ID)) //list childs of a parent..
+                {
+                    <li><a href="@childMenu.UrlLink"><i class="fa fa-circle-o"></i> @(new HtmlString(@childMenu.DisplayName.Replace("<br/>", "<br/><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>"))) </a></li>
+                }
+            </ul>
+
+            @*<a href="#">
+                    <div class="row">
+                        <div class="col-xs-2 col-sm-2 col-lg-1" style="padding-left:2px; padding-right:0px; ">
+                            <i class="fa fa-dashboard"></i>
+                        </div>
+                        <div class="col-xs-8 col-sm-8 col-lg-9" style="padding-left:2px; padding-right:0px; ">
+                            @(new HtmlString(@parentMenu.DisplayName))
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-lg-2" style="padding-left:0px; padding-right:15px; ">
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </div>
+                    </div>
+                </a>*@
+        </li>
+
+        @*<li class="treeview" style="white-space : normal">
+                <a href="#">
+
+                    <i class="fa fa-dashboard"></i>
+                    <span>@(new HtmlString(@parentMenu.DisplayName))</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu" style="white-space : normal">
+                    @foreach (var childMenu in Model.returnMenuRole.lstMenuRole.Where(e => e.ParentMenuID == parentMenu.ID)) //list parent menu.
+                    {
+                        <li><a href="@childMenu.UrlLink"><i class="fa fa-circle-o"></i> @childMenu.DisplayName </a></li>
+                    }
+                </ul>
+            </li>*@
+    }
+
+
+
+
+    @*<li class="treeview">
+            <a href="#">
+                <i class="fa fa-dashboard"></i> <span>Tool Jig</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="/ToolList/Index"><i class="fa fa-circle-o"></i> Tool Registration </a></li>
+                <li><a href="/Line/Index"><i class="fa fa-circle-o"></i> Line </a></li>
+                <li><a href="/ToolIQC/Index"><i class="fa fa-circle-o"></i> Tool IQC </a></li>
+            </ul>
+        </li>
+
+
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-dashboard"></i> <span>Tool Jig</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="/ToolList/Index"><i class="fa fa-circle-o"></i> Tool Registration </a></li>
+                <li><a href="/Line/Index"><i class="fa fa-circle-o"></i> Line </a></li>
+                <li><a href="/ToolIQC/Index"><i class="fa fa-circle-o"></i> Tool IQC </a></li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-dashboard"></i> <span>Production Control</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu" style="display:none">
+                <li><a href="/ProgramName/Index"><i class="fa fa-circle-o"></i> ProgramName  </a></li>
+                <li><a href="/ProgramPdtCtrl/Index"><i class="fa fa-circle-o"></i>ProgramPdtCtrl </a></li>
+                <li><a href="/ProgramPdtCtrlhistory/Index"><i class="fa fa-circle-o"></i>ProgramPdtCtrl History</a></li>
+                <li><a href="/ProductionCondition/ProductionControlList"><i class="fa fa-circle-o"></i> Production Condition</a></li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-dashboard"></i> <span>Machine Maintenance</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu" style="display:none">
+                <li><a href="/MachineMtnMonthYear/MachineMtnMonthYearList"><i class="fa fa-circle-o"></i> Machine Maintenance </a></li>
+                <li><a href="/MachineMtnContentList/Index"><i class="fa fa-circle-o"></i> Maintenance Content List  </a></li>
+                <li><a href="/Machine/Machine"><i class="fa fa-circle-o"></i> Machine List </a></li>
+                <li><a href="/MachinePart/Index"><i class="fa fa-circle-o"></i> Machine Part </a></li>
+                <li><a href="/MachineType/Index"><i class="fa fa-circle-o"></i> Machine Type </a></li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-dashboard"></i> <span>First Piece Buyoff</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu" style="display:none">
+                <li><a href="/FPBChecking/Index"><i class="fa fa-circle-o"></i> FPBChecking  </a></li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-dashboard"></i> <span>Administration</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu" style="display:none">
+                <li><a href="/User/Index"><i class="fa fa-circle-o"></i> User </a></li>
+                <li><a href="/userrole/listuserrole"><i class="fa fa-circle-o"></i> User Role </a></li>
+
+                <li><a href="/Role/Index"><i class="fa fa-circle-o"></i> Role </a></li>
+                <li><a href="/Role/ListAllMenuWithRolePermission"><i class="fa fa-circle-o"></i> Role Menu </a></li>
+                <li><a href="/Menu/Index"><i class="fa fa-circle-o"></i> Menu </a></li>
+            </ul>
+        </li>*@
+</ul>

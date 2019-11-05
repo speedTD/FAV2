@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="content">
+    <!-- Display grid, CRUD button -->
+    <div class="row" style="overflow-x: scroll;">
+        <div class="col-xs-12">
+            <h2>Tool Type List</h2>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="clearTextBox();">Add New Tool Type List</button><br /><br />
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr class="bg-light-blue color-palette text-center">
+                        <th>
+                            ToolTypeID
+                        </th>
+                        <th>
+                            ToolTypeName
+                        </th>
+                        <th>
+                            isActive
+                        </th>                     
+                        <th>
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="tbody"></tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 text-center" id="page-selection">
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"></button>
+                    <h4 class="modal-title" id="myModalLabel">Add new Tool Type List</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row">
+                            <div class="col-sm-7">
+                                <div class="form-group row">
+                                    <label for="ToolTypeID" class="col-sm-3 col-form-label">ToolTypeID</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="ToolTypeID" placeholder="ToolTypeID">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="ToolTypeName" class="col-sm-3 col-form-label">ToolTypeName</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="ToolTypeName" placeholder="ToolTypeName">
+                                    </div>
+                                </div>                       
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btnAdd" onclick="return InsertToolType();">Save</button>
+                    <button type="button" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="UpdateToolType();">Update</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@*<script src="~/Scripts/jquery-3.0.0.min.js"></script>*@
+<script src="~/Scripts/Common/SM_Common.js"></script>
+<script src="~/Scripts/Paging/jquery.bootpag.min.js"></script>
+<script src="~/Scripts/ToolTypeList/ToolTypeList.js?v=@DateTime.Now.ToString("yyMMddHHssmm")"></script>
+
+

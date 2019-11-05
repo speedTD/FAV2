@@ -1,0 +1,229 @@
+﻿@{
+    ViewBag.Title = "Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="content">
+    <link href="~/Content/bootstrap-toggle.min.css" rel="stylesheet" />
+    <!-- Display grid, CRUD button -->
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Báo cáo bảo trì máy/Machine Maintenance Report</h3>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-lg-3 hidden-sm hidden-xs">
+                </div>
+                <div class="col-lg-6 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-3 col-xs-12">
+                            <div class="form-group">
+                                <label for="MachineID" class="col-form-label">Machine ID</label>
+                                <input type="text" class="form-control" id="MachineID" placeholder="MachineID">
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-3 col-xs-12">
+                            <div class="form-group">
+                                <label for="MachineName" class="col-form-label">Machine Name</label>
+                                <input type="text" class="form-control" id="MachineName" placeholder="MachineName" disabled>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-3 col-xs-12">
+                            <div class="form-group">
+                                <label for="Line" class="col-form-label">Line</label>
+                                <input type="text" class="form-control" id="LineID" placeholder="LineID">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-3 col-xs-12">
+                            <div class="form-group">
+                                <label for="">Hàng ngày/Daily</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-3 col-xs-12">
+                            <div class="form-group">
+                                <label class="col-form-label" for="">Từ ngày /FromDate</label>
+                                <div class='input-group date' id='FromDate'>
+                                    <input type='text' class="form-control" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-3 col-xs-12">
+                            <div class="form-group">
+                                <label class="col-form-label" for="">Đến ngày /ToDate</label>
+                                <div class='input-group date' id='ToDate'>
+                                    <input type='text' class="form-control" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-3 col-xs-12">
+                            <div class="form-group">
+                                <label for="btnExport" class="col-form-label">&nbsp;</label>
+                                <button type="button" class="btn btn-primary form-control pull-left"  id="btnExport" onclick="return ExportExcel(Common_MachineMtn_FrequencyID.Daily);">Export</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-3 col-xs-12">
+                            <div class="form-group">
+                                <label for="">Hàng tuần /Weekly</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-3 col-xs-12">
+                            <div class="form-group">
+                                <label class="col-form-label" for="">Từ tuần /FromWeek</label>
+                                <div class='input-group date' id='FromWeek'>
+                                    <input type='text' class="form-control" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-3 col-xs-12">
+                            <div class="form-group">
+                                <label class="col-form-label" for="">Đến tuần /ToWeek</label>
+                                <div class='input-group date' id='ToWeek'>
+                                    <input type='text' class="form-control" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-3 col-xs-12">
+                            <div class="form-group">
+                                <label for="btnExport" class="col-form-label">&nbsp;</label>
+                                <button type="button" class="btn btn-primary form-control pull-left" id="btnExport" onclick="return ExportExcel(Common_MachineMtn_FrequencyID.Weekly);">Export</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-3 col-xs-12">
+                            <div class="form-group">
+                                <label for="">Hàng tháng /Monthly</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-3 col-xs-12">
+                            <div class="form-group">
+                                <label class="col-form-label" for="">Từ tháng /FromMonth</label>
+                                <div class='input-group date' id='FromMonth'>
+                                    <input type='text' class="form-control" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-3 col-xs-12">
+                            <div class="form-group">
+                                <label class="col-form-label" for="">Đến tháng /ToMonth</label>
+                                <div class='input-group date' id='ToMonth'>
+                                    <input type='text' class="form-control" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-3 col-xs-12">
+                            <div class="form-group">
+                                <label for="btnExport" class="col-form-label">&nbsp;</label>
+                                <button type="button" class="btn btn-primary form-control pull-left" id="btnExport" onclick="return ExportExcel(Common_MachineMtn_FrequencyID.Monthly);">Export</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-3 col-xs-12">
+                            <div class="form-group">
+                                <label for="">Hàng năm /Yearly</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-3 col-xs-12">
+                            <div class="form-group">
+                                <label class="col-form-label" for="">Từ năm /FromYear</label>
+                                <div class='input-group date' id='FromYear'>
+                                    <input type='text' class="form-control" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-3 col-xs-12">
+                            <div class="form-group">
+                                <label class="col-form-label" for="">Đến năm /ToYear</label>
+                                <div class='input-group date' id='ToYear'>
+                                    <input type='text' class="form-control" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-3 col-xs-12">
+                            <div class="form-group">
+                                <label for="btnExport" class="col-form-label">&nbsp;</label>
+                                <button type="button" class="btn btn-primary form-control pull-left" id="btnExport" onclick="return ExportExcel(Common_MachineMtn_FrequencyID.Yearly);">Export</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 hidden-sm hidden-xs">
+                </div>
+                <div id="abcd"></div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="~/Scripts/Common/SM_Common.js"></script>
+<script src="~/Scripts/MachineMtnWeekMonthYear/MachineMtnReport.js?v=@DateTime.Now.ToString("yyMMddHHssmm")"></script>
+
+<script type="text/javascript">
+    function ExportExcel(frequencyID) {
+        Load_MachineInfo();
+        var res = isValidateToExportExcel();
+        if (res == false) {
+            alert('Không thể export. Hãy kiểm tra thông tin nhập vào./Cannot export. Check input information.');
+            return false;
+        }
+
+        if (frequencyID = Common_MachineMtn_FrequencyID.Daily) {
+            var MachineMtnReportDataSearchObj =
+            {
+                MachineID: $('#MachineID').val(),
+                MachineName: $('#MachineName').val(),
+                OperatorID: 0,
+                Shift: 0,
+                FrequencyID: frequencyID,
+                MaintenanceDate: null,
+                FromDate: $('#FromDate').data("date"),
+                ToDate: $('#ToDate').data("date"),
+                FromInt: 0,
+                ToInt: 0
+            };
+        }
+        $.ajax({
+            url: "/MachineMtnReportData/CreateReport_2/",
+            data: JSON.stringify(MachineMtnReportDataSearchObj),
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "html",
+            success: function (result) {
+                window.location = '@Url.Action("CreateReport_2", "MachineMtnReportData")' + "?" + $.param(MachineMtnReportDataSearchObj);
+
+            },
+            error: function (errormessage) {
+                alert('Lỗi/Error ExportExcel()' + errormessage.responseText);
+            }
+        });
+    };
+
+</script>
+

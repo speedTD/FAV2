@@ -1,0 +1,239 @@
+﻿@model TestABC.Models.Data.PermisionControllerVM
+@{
+    ViewBag.Title = "Edit";
+}
+<section class="content-header"></section>
+<section class="content">
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Cập nhật bảng kiểm tra bảo trì máy/Update machine maintenance checksheet</h3>
+        </div>
+        <div class="box-body">
+            <!-- Display grid, CRUD button -->
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 col-xs-12">
+                    <form>
+                        <div class="row">
+                            <div class="col-lg-2 col-sm-3 col-xs-12">
+                                <div class="form-group">
+                                    <label class="col-form-label" for="OperatorName">Operator Name</label>
+                                    <input type="text" class="form-control" id="OperatorName" placeholder="OperatorName" disabled>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-sm-3 col-xs-12">
+                                <div class="form-group">
+                                    <label class="col-form-label" for="Frequency">Frequency</label>
+                                    <select name="dropdown" id="Frequency" class="form-control">
+                                        <option value="1" selected>Bảo dưỡng hàng ngày</option>
+                                        <option value="2">Bảo dưỡng hàng tuần</option>
+                                        <option value="3">Bảo dưỡng hàng tháng</option>
+                                        <option value="4">Bảo dưỡng 3 tháng</option>
+                                        <option value="5">Bảo dưỡng 6 tháng</option>
+                                        <option value="6">Bảo dưỡng hàng năm</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-sm-3 col-xs-12" id="div_Week">
+                                <div class="form-group">
+                                    <label for="Week">Week</label>
+                                    <input type="text" class="form-control" id="Week" placeholder="Week">
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-sm-3 col-xs-12" id="div_Month">
+                                <div class="form-group">
+                                    <label for="Month">Month</label>
+                                    <input type="text" class="form-control" id="Month" placeholder="Month">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-sm-3 col-xs-12" id="div_Year">
+                                <div class="form-group">
+                                    <label for="Month">Year</label>
+                                    <input type="text" class="form-control" id="Year" placeholder="Year">
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-sm-3 col-xs-12" id="div_MaintenanceDate">
+                                <div class="form-group">
+                                    <label for="MaintenanceDate" class="col-form-label">Maintenance Date</label>
+                                    <input class="datepicker form-control" id="MaintenanceDate" data-date-format="mm/dd/yyyy" data-provide="datepicker">
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-sm-3 col-xs-12" id="div_Shift">
+                                <div class="form-group">
+                                    <label for="Shift" class="col-form-label">Shift</label>
+                                    <select name="dropdown" id="Shift" class=" form-control">
+                                        <option value="1" selected>Shift 1</option>
+                                        <option value="2">Shift 2</option>
+                                        <option value="3">Shift 3</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2 col-sm-3 col-xs-12">
+                                <div class="form-group">
+                                    <label for="MachineID" class="col-form-label">Machine ID</label>
+                                    <input type="text" class="form-control" id="MachineID" placeholder="MachineID">
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-sm-3 col-xs-12">
+                                <div class="form-group">
+                                    <label for="MachineName" class="col-form-label">Machine Name</label>
+                                    <input type="text" class=" form-control" id="MachineName" placeholder="MachineName" disabled>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-sm-3 col-xs-12">
+                                <div class="form-group">
+                                    <label for="Line" class="col-form-label">Line</label>
+                                    <input type="text" class=" form-control" id="LineID" placeholder="LineID">
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-sm-3 col-xs-12">
+                                <div class="form-group">
+                                    <label for="TotalResult" class="col-form-label">Maintenance Result</label>
+                                    <input type="text" class=" form-control" id="TotalResult" placeholder="">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-sm-3 col-xs-12">
+                                <div class="form-group">
+                                    <label for="btnChecker" class="col-form-label">&nbsp;</label>
+                                    <button type="button" class="btn btn-primary form-control pull-left" id="btnChecker" data-toggle="modal" data-target="#myCheckerInputPasswordModal">Checker</button>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-sm-3 col-xs-12">
+                                <div class="form-group">
+                                    <label for="CheckerResult" class="col-form-label">Checker Result</label>
+                                    <input type="text" class="form-control" id="CheckerResult" placeholder="" disabled>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Table -->
+                        @*<h5 style="text-align: center">TABLE EQUIPMENT MAINTENANCE CHECK</h5>*@
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-12 col-xs-12">
+                                <div class="table-responsive no-padding">
+                                    <table id="tblMachineMtnContentList" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr class="bg-light-blue color-palette text-center">
+                                                <th style="display:none;">
+                                                    MachineMtnDetailID
+                                                </th>
+                                                <th>
+                                                    ID
+                                                </th>
+                                                <th>
+                                                    Machine Part
+                                                </th>
+                                                <th>
+                                                    Content
+                                                </th>
+                                                <th>
+                                                    Tool
+                                                </th>
+                                                <th>
+                                                    Method
+                                                </th>
+                                                <th>
+                                                    Standard
+                                                </th>
+                                                <th>
+                                                    Min
+                                                </th>
+                                                <th>
+                                                    Max
+                                                </th>
+                                                <th>
+                                                    ActualValue
+                                                </th>
+                                                <th style="width:12%">
+                                                    Result
+                                                </th>
+                                                <th>
+                                                    ResultContents
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="tbody"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="box-footer right">
+           @if (Model.isAllow_Edit)
+           { 
+               <button type="button" class="btn btn-primary " id="btnAdd" onclick="return UpdateMachineMtn();">Save</button>
+           }
+            <a href="/MachineMtnMonthYear/MachineMtnMonthYearList" class="btn btn-primary ">Close</a>
+        </div>
+    </div>
+</section>
+
+<!-- Display checker input password. -->
+<div class="modal fade" id="myCheckerInputPasswordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="width:50%">
+            <form>
+                <div class="modal-header">
+                    <label for="CheckLogin" class="col-md-3 col-form-label">Check Login</label>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-3 form-group">
+                                <label>User Name:</label>
+                            </div>
+                            <div class="col-md-9 form-group">
+                                <input type="text" name="UserName" id="CheckerUserName" class="form-control" placeholder="UserName">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label>PassWord:</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="password" name="Password" id="CheckerPassword" class="form-control" placeholder="Password">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label>Result:</label>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="CheckerResult_RadioOptions" id="CheckerResult_RadioOK" value="OK">
+                                    <label class="form-check-label" for="CheckerResult_RadioOK">OK</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="CheckerResult_RadioOptions" id="CheckerResult_RadioNG" value="NG">
+                                    <label class="form-check-label" for="CheckerResult_RadioNG">NG</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="return CheckerUser_confirmResult('Add');">Login</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/Common/SM_Common.js"></script>
+<script src="~/Scripts/MachineMtnWeekMonthYear/MachineMtnMonthYear_Edit.js?v=@DateTime.Now.ToString("yyMMddHHssmm")"></script>
+
+
+

@@ -1,0 +1,238 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content-header">
+    <h3> Machine maintenance daily.</h3>
+    <a href="/MachineMtnDaily/Insert" class="btn btn-primary">Add new</a> 
+</section>
+
+<section class="content">
+    <!-- Display grid, CRUD button -->
+    @*<div class="row">
+            <div class="col-xs-12">
+                <h4 class="page-header"> Machine maintenance daily</h4>
+                <a href="/MachineMtnDaily/Insert" class="btn btn-primary">Add new</a>
+                <!--*<button type="button" class="btn btn-primary" onclick="window.location.href = '/MachineMtnDaily/Insert'">Add new</button> -->
+            </div>
+        </div>*@
+@*<div class="box box-default color-palette-box">
+    <div class="box-body">*@ 
+        <div class="row">
+            <div class="col-xs-2">
+                <!-- store userLogin Value -->
+                @*<input type="hidden" id="UserLogin" data-username="@ViewBag.UserLogin.UserName" data-factoryid="@ViewBag.UserLogin.FactoryID" data-id="@ViewBag.UserLogin.ID" />*@
+
+                <div class="form-group">
+                    <label for="OperatorName">OperatorName</label>
+                    <input type="text" class="form-control" id="OperatorName" placeholder="OperatorName">
+                </div>
+            </div>
+            <div class="col-xs-2">
+                <div class="form-group">
+                    <label for="Frequency">Frequency</label>
+                    <select name="dropdown" id="Frequency" class="form-control">
+                        <option value="1" selected>Bảo dưỡng hàng ngày</option>
+                        <option value="2">Bảo dưỡng hàng tuần</option>
+                        <option value="3">Bảo dưỡng hàng tháng</option>
+                        <option value="4">Bảo dưỡng 3 tháng</option>
+                        <option value="5">Bảo dưỡng 6 tháng</option>
+                        <option value="6">Bảo dưỡng hàng năm</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-2">
+                <div class="form-group">
+                    <label for="Shift">Shift</label>
+                    <select name="dropdown" id="Shift" class="form-control">
+                        <option value="1" selected>Shift 1</option>
+                        <option value="2">Shift 2</option>
+                        <option value="3">Shift 3</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-2">
+            
+                <div class="form-group">
+                    <label for="rdoResult">Result</label>
+                    <div class="form-check form-check-inline">
+                        <label class="radio-inline"><input type="radio" name="rdo_Result" value="OK">OK</label>
+                        <label class="radio-inline"><input type="radio" name="rdo_Result" value="NG">NG</label>
+                        <label class="radio-inline"><input type="radio" name="rdo_Result" value="">All</label>
+                </div>
+                        @*<label for="rdoResult">Result</label>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="rdo_Result" id="rdoResult1" value="OK">
+                <label class="form-check-label" for="gridRadios1">
+                    OK
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="rdo_Result" id="rdoResult2" value="OK">
+                <label class="form-check-label" for="gridRadios2">
+                   NG
+                </label>
+            </div>*@
+
+
+                    </div>
+            </div>
+            <div class="col-xs-2"></div>
+            <div class="col-xs-2"></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2">
+                <div class="form-group">
+                    <label for="Line">Line</label>
+                    <input type="text" class="form-control" id="Line" placeholder="Line">
+                </div>
+            </div>
+            <div class="col-xs-2">
+                <div class="form-group">
+                    <label for="MachineID">MachineID</label>
+                    <input type="text" class="form-control" id="MachineID" placeholder="MachineID" >
+                </div>
+            </div>
+            <div class="col-xs-2">
+                <div class="form-group">
+                    <label for="MachineName">MachineName</label>
+                    <input type="text" class="form-control" id="MachineName" placeholder="MachineName">
+                </div>
+            </div>
+            <div class="col-xs-2">
+                <div class="form-group">
+                    <label for="MaintenanceDate">MaintenanceDate</label>
+                    <input class="datepicker form-control" id="MaintenanceDate" data-date-format="mm/dd/yyyy" data-provide="datepicker">
+                </div>
+            </div>
+            <div class="col-xs-2">
+                <div class="form-group">
+                    <label for="btnSearch">&nbsp;</label>
+                    <button type="button" class="btn btn-primary form-control pull-left" id="btnSearch" onclick="return SearchMachineMtnList();">Search </button>
+                </div>
+            </div>
+            <div class="col-xs-2">
+                <div class="form-group">
+                    <label for="btnClearSearch">&nbsp;</label>
+                    <button type="button" class="btn btn-primary form-control pull-left" id="btnClearSearch" onclick="return Clear_SearchMachineMtnList();">Clear search </button>
+                </div>
+            </div>
+        </div>
+    
+
+
+        @*<div class="col-xs-12">
+            <form>
+                <div class="form-group row">
+                    <label for="OperatorName" class="col-md-3 col-form-label">Operator Name</label>
+                    <label for="Frequency" class="col-md-3 col-form-label">Frequency</label>
+                    <label for="Shift" class="col-md-3 col-form-label">Shift</label>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" id="OperatorName" placeholder="OperatorName">
+                    </div>
+                    <div class="col-md-3">
+                        <select name="dropdown" id="Frequency" class="form-control">
+                            <option value="1" selected>Bảo dưỡng hàng ngày</option>
+                            <option value="2">Bảo dưỡng hàng tuần</option>
+                            <option value="3">Bảo dưỡng hàng tháng</option>
+                            <option value="4">Bảo dưỡng 3 tháng</option>
+                            <option value="5">Bảo dưỡng 6 tháng</option>
+                            <option value="6">Bảo dưỡng hàng năm</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <select name="dropdown" id="Shift" class="form-control">
+                            <option value="1" selected>Shift 1</option>
+                            <option value="2">Shift 2</option>
+                            <option value="3">Shift 3</option>
+
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="Line" class="col-md-3 col-form-label">Line</label>
+                    <label for="Machine" class="col-md-3 col-form-label">Machine</label>
+                    <label for="MaintenanceDate" class="col-md-3 col-form-label">Maintenance Date</label>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-3">
+                        <select name="dropdown" id="Line" class="form-control"></select>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" id="Machine" placeholder="Machine">
+                    </div>
+                    <div class="col-md-3">
+                        <input class="datepicker form-control" id="MaintenanceDate" data-date-format="mm/dd/yyyy" data-provide="datepicker">
+                    </div>
+
+                </div>
+            </form>
+                    </div>*@
+        @*<h5 style="text-align: center">TABLE EQUIPMENT MAINTENANCE CHECK</h5>*@
+        <div class="row">
+            <div class="col-xs-12">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr class="bg-light-blue color-palette text-center">
+                            <th>
+                                Machine ID
+                            </th>
+                            <th>
+                                Machine Name
+                            </th>
+                            <th>
+                                OperatorID
+                            </th>
+                            <th>
+                                Operator Name
+                            </th>
+                            <th>
+                                Frequency
+                            </th>
+                            <th>
+                                Shift
+                            </th>
+                            <th>
+                                MaintenanceDate
+                            </th>
+                            <th>
+                                Result
+                            </th>
+                            <th>
+                                Action
+                            </th>
+                        </tr>
+
+                    </thead>
+                    <tbody class="tbody"></tbody>
+                </table>
+            </div>
+        </div>
+
+
+        @*<div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnAdd" onclick="return InsertMachineMtnDaily();">Insert</button>
+                <button type="button" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="UpdateMachine();">Update</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>*@
+        @*</div>
+            </div>*@
+</section>
+
+<script src="~/Scripts/Common/SM_Common.js"></script>
+<script src="~/Scripts/MachineMtnDaily/MachineMtnDailyList.js?v=@DateTime.Now.ToString("yyMMddHHssmm")"></script>
+
+
+
+
+
+
+
+
+
+
+

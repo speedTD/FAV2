@@ -1,0 +1,40 @@
+﻿.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+  padding: 8px;    
+}
+table .myText-Center th {
+    text-align: center;
+    vertical-align: middle;
+}
+div .myRow-bordered {
+  border-bottom: 1px solid #f4f4f4;
+  margin-bottom: 10px;
+}
+/*Image*/
+div .imgContainer {
+    max-height: 170px;
+    overflow: hidden;
+    max-width: 164px;
+    float: left;
+    border-radius: 5px;
+    margin: 0 5px 5px 0;
+    position: relative;
+}
+div .imgContainer .upload-image-tools {
+    height: 20px;
+    min-width: 60px;
+    margin: 5px;
+    background: #dae4ed;
+    border-radius: 3px;
+    padding: 4px;
+}
+    span .upload-tool-delete {
+        background: url(~/Images/Common/upload-tool-delete.png) no-repeat 50% 50%;
+        width: 25px;
+        height: 19px;
+        margin-right: 0;
+    }

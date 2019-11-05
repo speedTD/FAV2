@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="content">
+    <!-- Display grid, CRUD button -->
+    <div class="row" style="overflow-x: scroll;">
+        <div class="col-xs-12">
+            <h2>FPB</h2>
+            <a href="/FPBChecking/Index" class="btn btn-primary">Add New FPB</a>
+            @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="clearTextBox();">Add New FPB</button><br /><br />*@
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr class="bg-light-blue color-palette text-center">
+                        <th>
+                            ID
+                        </th>
+                        <th>
+                            IndicationNo
+                        </th>
+                        <th>
+                            FPBCheckingDate
+                        </th>
+                        <th>
+                            ItemName
+                        </th>
+                        <th>
+                            ItemCode
+                        </th>
+                        <th>
+                            BatchNo
+                        </th>
+                        <th>
+                            MachineID
+                        </th>
+                        <th>
+                            MachineName
+                        </th>
+                        <th>
+                            UserID
+                        </th>
+                        <th>
+                            SeqNo
+                        </th>
+                        <th>
+                            BlockID
+                        </th>
+                        <th>
+                            Result
+                        </th>
+                        <th>
+                            ResultContent
+                        </th>
+                        <th>
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="tbody"></tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 text-center" id="page-selection">
+        </div>
+    </div>    
+</section>
+
+*@*<script src="~/Scripts/jquery-3.0.0.min.js"></script>*@*
+<script src="~/Scripts/Common/SM_Common.js"></script>
+@*<script src="~/Scripts/Paging/jquery.bootpag.min.js"></script>*@
+<script src="~/Scripts/FPB/FPB.js?v=@DateTime.Now.ToString("yyMMddHHssmm")"></script>

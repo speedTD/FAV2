@@ -1,0 +1,97 @@
+﻿
+@{
+    ViewBag.Title = "EditYear";
+}
+
+<section class="content">
+    <!-- Display grid, CRUD button -->
+    <div class="row" style="overflow-x: scroll;">
+        <h2>Update machine maintenance yearly</h2>
+        <div class="col-xs-12">
+            <form>
+                <div class="form-group row">
+                    <label for="OperatorName" class="col-md-3 col-form-label">Operator Name</label>
+                    <label for="Frequency" class="col-md-3 col-form-label">Frequency</label>
+
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" disabled id="OperatorName" placeholder="OperatorName">
+                    </div>
+                    <div class="col-md-3">
+                        <select name="dropdown" id="Frequency" class="form-control">
+                            <option value="1">Bảo dưỡng hàng ngày</option>
+                            <option value="2">Bảo dưỡng hàng tuần</option>
+                            <option value="3">Bảo dưỡng hàng tháng</option>
+                            <option value="4">Bảo dưỡng 3 tháng</option>
+                            <option value="5">Bảo dưỡng 6 tháng</option>
+                            <option value="6" selected>Bảo dưỡng hàng năm</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="Line" class="col-md-3 col-form-label">Line</label>
+                    <label for="Machine" class="col-md-3 col-form-label">Machine</label>
+                    <label for="MaintenanceDate" class="col-md-3 col-form-label">Maintenance Date</label>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-3">
+                        <select name="dropdown" disabled id="Line" class="form-control"></select>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" id="Machine" placeholder="Machine">
+                    </div>
+                    <div class="col-md-3">
+                        <input class="datepicker form-control" id="MaintenanceDate" data-date-format="mm/dd/yyyy" data-provide="datepicker">
+                    </div>
+                    <div class="col-md-1">
+                        <input type="text" class="form-control" id="Year" placeholder="Year">
+                    </div>
+                </div>
+            </form>
+            <h5 style="text-align: center">TABLE EQUIPMENT MAINTENANCE CHECK</h5>
+            <div class="row" style="overflow-x: scroll;">
+                <div class="col-xs-12">
+                    <table id="tblMachineMtnContentList" class="table table-bordered table-hover">
+                        <thead>
+                            <tr class="bg-light-blue color-palette text-center">
+                                <th style="display:none">
+                                    ID
+                                </th>
+                                <th>
+                                    MachineMtnContentID
+                                </th>
+                                <th>
+                                    Machine Part
+                                </th>
+                                <th>
+                                    Content Maintenance
+                                </th>
+                                <th>
+                                    Tool Maintenance
+                                </th>
+                                <th>
+                                    Method Maintenance
+                                </th>
+                                <th>
+                                    Result
+                                </th>
+                            </tr>
+
+                        </thead>
+                        <tbody class="tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="btnAdd" onclick="return InsertMachineMtnYearly();">Save</button>
+        <a href="/MachineMtnDaily/IndexYear" class="btn btn-danger">Close</a>
+    </div>
+</section>
+
+@*<script src="~/Scripts/jquery-3.0.0.min.js"></script>*@
+<script src="~/Scripts/Common/SM_Common.js"></script>
+<script src="~/Scripts/MachineMtnDaily/MachineMtnYearlyEdit.js?v=@DateTime.Now.ToString("yyMMddHHssmm")"></script>
+

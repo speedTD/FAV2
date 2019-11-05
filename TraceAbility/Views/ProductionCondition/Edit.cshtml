@@ -1,0 +1,143 @@
+﻿@{
+    ViewBag.Title = "Add";
+}
+<section class="content-header">
+</section>
+<section class="content">
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Sửa/Edit Production Condition</h3>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-lg-2 col-sm-3 col-xs-12">
+                    <div class="form-group">
+                        <label for="IndicationID">Indication No</label>
+                        <input type="text" class="form-control" id="IndicationID" placeholder="IndicationID">
+                        <input type="hidden" id="ProductionControlID" value="0" />
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-3 col-xs-12">
+                    <div class="form-group">
+                        <label for="ItemCode" class="col-form-label">Item Code</label>
+                        <input type="text" class="form-control" id="ItemCode" placeholder="ItemCode">
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-3 col-xs-12">
+                    <div class="form-group">
+                        <label for="ItemName" class="col-form-label">Item Name</label>
+                        <input type="text" class="form-control" id="ItemName" placeholder="ItemName">
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-3 col-xs-12">
+                    <div class="form-group">
+                        <label for="SeqNo" class="col-form-label">Seq No.</label>
+                        <input type="text" class="form-control" id="SeqNo" placeholder="SeqNo">
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-3 col-xs-12">
+                    <div class="form-group">
+                        <label for="BatchNo" class="col-form-label">Batch No</label>
+                        <input type="text" class="form-control" id="BatchNo" placeholder="BatchNo">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2 col-sm-3 col-xs-12">
+                    <div class="form-group">
+                        <label for="MachineID" class="col-form-label">MachineID</label>
+                        <input type="text" class="form-control" id="MachineID" placeholder="MachineID">
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-3 col-xs-12">
+                    <div class="form-group">
+                        <label for="MachineName" class="col-form-label">MachineName</label>
+                        <input type="text" class="form-control" disabled id="MachineName" placeholder="MachineName">
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-3 col-xs-12">
+                    <div class="form-group">
+                        <label for="PdtCtrlDateTime">Date Time</label>
+                        <div class='input-group date' id='PdtCtrlDateTime'>
+                            <input type='text' class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-3 col-xs-12">
+                    <div class="form-group">
+                        <label for="ProgramName" class="col-form-label">Program Name</label>
+                        <input type="text" class="form-control" id="ProgramName" placeholder="ProgramName">
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-3 col-xs-12">
+                    <div class="form-group">
+                        <label for="OperatorName" class="col-form-label">Operator</label>
+                        <input type="text" class="form-control" disabled id="OperatorName" placeholder="OperatorName">
+                        <input type="hidden" id="OperatorID" />
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-3 col-xs-12">
+                    <div class="form-group">
+                        <label for="TotalResult" class="col-form-label">TotalResult</label>
+                        <input type="text" class="form-control" disabled id="TotalResult" placeholder="TotalResult">
+                    </div>
+                </div>
+            </div>
+            <table class="table table-bordered table-hover" id="tblProductionControlDetail">
+                <thead>
+                    <tr class="bg-light-blue color-palette text-center">
+                        <th style="display:none">
+                            ProgramPdtCtrlID
+                        </th>
+                        <th>
+                            Part
+                        </th>
+                        <th>
+                            Control Item
+                        </th>
+                        <th>
+                            ColumnName
+                        </th>
+                        <th>
+                            Spec display
+                        </th>
+                        <th>
+                            Unit
+                        </th>
+                        <th>
+                            Lower Limit
+                        </th>
+                        <th>
+                            Upper Limit
+                        </th>
+                        <th>
+                            Actual Value
+                        </th>
+                        <th>
+                            Result
+                        </th>
+                        <th style="display:none">
+                            ProductionControlDetailID
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="tbody"></tbody>
+            </table>
+        </div>
+        <div class="box-footer">
+            <button type="button" class="btn btn-primary" id="btnUpdate" onclick="return UpdateProductionControl();">Update</button>
+            <a href="/ProductionCondition/ProductionControlList" class="btn btn-danger">Close</a>
+        </div>
+    </div>
+</section>
+
+<script src="~/Scripts/Common/SM_Common.js"></script>
+<script src="~/Scripts/ProductionCondition/ProductionCondition_Edit.js?v=@DateTime.Now.ToString("yyMMddHHssmm")"></script>
+
+
+
+
+

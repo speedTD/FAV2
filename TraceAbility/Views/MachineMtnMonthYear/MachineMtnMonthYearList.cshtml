@@ -1,0 +1,174 @@
+﻿@model TestABC.Models.Data.PermisionControllerVM
+@{
+    ViewBag.Title = "Checksheet machine maintenance ";
+}
+<section class="content-header">
+</section>
+<section class="content">
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Bảng kiểm tra bảo trì máy / Checksheet machine maintenance</h3>
+            <div class="box-tools pull-right">
+                @if (Model.isAllow_Add)
+                {
+                    <a href="/MachineMtnMonthYear/Add" class="btn btn-primary"><i class="fa fa-plus"></i> Add new</a>
+                }
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-lg-2 col-sm-3 col-xs-12">
+
+                    <div class="form-group">
+                        <label for="OperatorName">OperatorName</label>
+                        <input type="text" class="form-control" id="OperatorName" placeholder="OperatorName">
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-3 col-xs-12">
+                    <div class="form-group">
+                        <label for="Frequency">Frequency</label>
+                        <select name="dropdown" id="Frequency" class="form-control">
+                            <option value="1" selected>Bảo dưỡng hàng ngày</option>
+                            <option value="2">Bảo dưỡng hàng tuần</option>
+                            <option value="3">Bảo dưỡng hàng tháng</option>
+                            <option value="4">Bảo dưỡng 3 tháng</option>
+                            <option value="5">Bảo dưỡng 6 tháng</option>
+                            <option value="6">Bảo dưỡng hàng năm</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-sm-3 col-xs-12">
+                    <div class="form-group">
+                        <label for="rdoResult">Total Result</label>
+                        <div class="form-check form-check-inline">
+                            <label class="radio-inline"><input type="radio" name="rdo_Result" value="OK">OK</label>
+                            <label class="radio-inline"><input type="radio" name="rdo_Result" value="NG">NG</label>
+                            <label class="radio-inline"><input type="radio" name="rdo_Result" value="" checked>All</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-3 col-xs-12">
+                    <div class="form-group">
+                        <label for="rdoResult">Checker Result</label>
+                        <div class="form-check form-check-inline">
+                            <label class="radio-inline"><input type="radio" name="rdo_CheckerResult" value="OK">OK</label>
+                            <label class="radio-inline"><input type="radio" name="rdo_CheckerResult" value="NG">NG</label>
+                            <label class="radio-inline"><input type="radio" name="rdo_CheckerResult" value="" checked>All</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row myRow-bordered">
+                <div class="col-lg-2 col-sm-3 col-xs-12">
+                    <div class="form-group">
+                        <label for="MachineID">MachineID</label>
+                        <input type="text" class="form-control" id="MachineID" placeholder="MachineID">
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-3 col-xs-12">
+                    <div class="form-group">
+                        <label for="MachineName">MachineName</label>
+                        <input type="text" class="form-control" id="MachineName" placeholder="MachineName">
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-3 col-xs-12">
+                    <div class="form-group">
+                        <label for="LineID">Line</label>
+                        <input type="text" class="form-control" id="LineID" placeholder="LineID">
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-3 col-xs-12">
+                    <div class="form-group">
+                        <label for="MaintenanceDate">MaintenanceDate</label>
+                        <input class="datepicker form-control" id="MaintenanceDate" data-date-format="mm/dd/yyyy" data-provide="datepicker">
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-3 col-xs-12">
+                    <div class="form-group">
+                        <label for="btnSearch">&nbsp;</label>
+                        <button type="button" class="btn btn-primary form-control pull-left" id="btnSearch" onclick="return SearchMachineMtnList();">
+                            <i class="fa fa-search"></i>&nbsp; Search </button>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-3 col-xs-12">
+                    <div class="form-group">
+                        <label for="btnClearSearch">&nbsp;</label>
+                        <button type="button" class="btn btn-primary form-control pull-left" id="btnClearSearch" onclick="return Clear_SearchMachineMtnList();">Clear search </button>
+                    </div>
+                </div>
+            </div>
+            <div style="height:6px;"></div>
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 col-xs-12">
+                        <table id="MachineMtn_DataTable" class="table table-striped table-bordered table-hover text-nowrap" style="width:100%">
+                            <thead >
+                                <tr class="bg-light-blue color-palette text-center">
+                                    <th>
+                                        Machine ID
+                                    </th>
+                                    <th>
+                                        Machine Name
+                                    </th>
+                                    <th >
+                                        OperatorID
+                                    </th>
+                                    <th >
+                                        Operator Name
+                                    </th>
+                                    <th >
+                                        Tần xuất <br/> (Frequency) 
+                                    </th>
+                                    <th >
+                                        MaintenanceDate 
+                                    </th>
+                                    <th >
+                                        Shift
+                                    </th>
+                                    <th >
+                                        Tuần <br />  (Week)
+                                    </th>
+                                    <th >
+                                        Tháng <br /> (Month)
+                                    </th>
+                                    <th >
+                                        Năm<br /> (Year) 
+                                    </th>
+                                    <th >
+                                        Checker
+                                    </th>
+                                    <th >
+                                        Checker Result
+                                    </th>
+                                    <th >
+                                        Total Result
+                                    </th>
+                                    <th >
+                                        Action
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="tbody"></tbody>
+                        </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 text-center" id="page-selection">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="~/Scripts/Common/SM_Common.js"></script>
+<script src="~/Scripts/MachineMtnWeekMonthYear/MachineMtnMonthYearList.js?v=@DateTime.Now.ToString("yyMMddHHssmm")"></script>
+
+
+
+
+
+
+
+
+
+
+

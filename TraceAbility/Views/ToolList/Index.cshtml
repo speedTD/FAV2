@@ -1,0 +1,299 @@
+﻿@{
+    ViewBag.Title = "Index";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    //Layout = null;
+}
+@*<link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />*@
+<!-- Content Header (Page header) -->
+@*<section class="content-header">
+    </section>*@
+<!-- Main content -->
+<section class="content">
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">Tool Record</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="clearTextBox();">
+                    <i class="fa fa-plus"></i>
+                    <span>Add New</span>
+                </button>
+            </div>
+        </div>
+        <div class="box-body">
+            <!--search -->
+            <div class="row">
+                <div class="col-xs-6 col-sm-3 col-lg-2">
+                    <div class="form-group">
+                        <label for="SearchToolID">SearchToolID</label>
+                        <input type="text" class="form-control" id="SearchToolID" placeholder="SearchToolID">
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-3 col-lg-2">
+                    <div class="form-group">
+                        <label for="SearchItemCode">Item</label>
+                        <input type="text" class="form-control" id="SearchItemCode" placeholder="SearchItemCode">
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-3 col-lg-2">
+                    <div class="form-group">
+                        <label for="SearchLineID">Line</label>
+                        <input type="text" class="form-control" id="SearchLineID" placeholder="SearchLineID">
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-3 col-lg-2">
+                    <div class="form-group">
+                        <label for="SearchMaker">Maker</label>
+                        <input type="text" class="form-control" id="SearchMaker" placeholder="SearchMaker">
+                    </div>
+                </div>
+                <div class="hidden-xs hidden-sm visible-lg col-lg-2"></div>
+                <div class="hidden-xs hidden-sm visible-lg col-lg-2"></div>
+                <div class="col-xs-6 col-sm-3 col-lg-2">
+                    <div class="form-group">
+                        <label for="SearchReceiveDate">ReceiveDate</label>
+                        <input class="datepicker form-control" id="SearchReceiveDate" data-date-format="mm/dd/yyyy" data-provide="datepicker">
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-3 col-lg-2">
+                    <div class="form-group">
+                        <label for="SearchStartUsing">StartUsing</label>
+                        <input class="datepicker form-control" id="SearchStartUsing" data-date-format="mm/dd/yyyy" data-provide="datepicker">
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-3 col-lg-2">
+                    <div class="form-group">
+                        <label for="SearchExpireDate">ExpireDate</label>
+                        <input class="datepicker form-control" id="SearchExpireDate" data-date-format="mm/dd/yyyy" data-provide="datepicker">
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-3 col-lg-2">
+                    <div class="form-group">
+                        <label for="btnSearch">&nbsp;</label>
+                        <button type="button" class="btn btn-primary form-control" id="btnSearch" onclick="return ToolList_SearchTools(1);">&nbsp;&nbsp;Search&nbsp;</button>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-3 col-lg-2">
+                    <div class="form-group">
+                        <label for="btnSearch">&nbsp;</label>
+                        <button type="button" class="btn btn-primary form-control" id="btnClearSearchItem" onclick="return ClearSearchItem();">Clear Search</button>
+                    </div>
+                </div>
+            </div>
+
+            <!--table tool -->
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 col-xs-12">
+                    <div class="table-responsive no-padding">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr class="bg-light-blue color-palette text-center">
+                                    <th>
+                                        ToolID
+                                    </th>
+                                    <th>
+                                        UserID
+                                    </th>
+                                    <th>
+                                        UserName
+                                    </th>
+                                    <th>
+                                        ToolType
+                                    </th>
+                                    <th>
+                                        ItemCode
+                                    </th>
+                                    <th>
+                                        Maker
+                                    </th>
+                                    <th>
+                                        Specification
+                                    </th>
+                                    <th>
+                                        ReceiveDate
+                                    </th>
+                                    <th>
+                                        StartUsing
+                                    </th>
+                                    <th>
+                                        LifeTime
+                                    </th>
+                                    <th>
+                                        ExpireDate
+                                    </th>
+                                    <th>
+                                        LineID
+                                    </th>
+                                    <th>
+                                        Status
+                                    </th>
+                                    <th>
+                                        Remark
+                                    </th>
+                                    <th>
+                                        Action
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--paging -->
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 col-xs-12 text-center" id="page-selection">
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" id="totalPage" />
+</section>
+
+<!-- Display CRUD button -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"></button>
+                <h4 class="modal-title" id="myModalLabel">Add new Tool</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <div class="form-group row">
+                                <label for="ToolID" class="col-sm-3 col-form-label">ToolID</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="ToolID" placeholder="ToolID" onkeyup="scanToolID(event);">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="UserID" class="col-sm-3 col-form-label">UserID</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" disabled id="UserID" placeholder="UserID">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="ToolType" class="col-sm-3 col-form-label">ToolType</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" id="ToolType"></select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="ItemCode" class="col-sm-3 col-form-label">ItemCode</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="ItemCode" placeholder="ItemCode">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="Maker" class="col-sm-3 col-form-label">Maker</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="Maker" placeholder="Maker">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="Specification" class="col-sm-3 col-form-label">Specification</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="Specification" placeholder="Specification">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="ReceiveDate" class="col-sm-3 col-form-label">ReceiveDate</label>
+                                <div class="col-sm-9">
+                                    <input class="datepicker form-control" id="ReceiveDate" data-date-format="mm/dd/yyyy" data-provide="datepicker">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="StartUsing" class="col-sm-3 col-form-label">StartUsing</label>
+                                <div class="col-sm-9">
+                                    <input class="datepicker form-control" id="StartUsing" data-date-format="mm/dd/yyyy" data-provide="datepicker">
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="LifeTime" class="col-sm-3 col-form-label">LifeTime</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="LifeTime" placeholder="LifeTime">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="ExpireDate" class="col-sm-3 col-form-label">ExpireDate</label>
+                                <div class="col-sm-9">
+                                    <input class="datepicker form-control" id="ExpireDate" data-date-format="mm/dd/yyyy" data-provide="datepicker">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="LineID" class="col-sm-3 col-form-label">LineID</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" id="LineID"></select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="Status" class="col-sm-3 col-form-label">Status</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="Status" placeholder="Status">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="Remark" class="col-sm-3 col-form-label">Remark</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="Remark" placeholder="Remark">
+                                </div>
+                            </div>
+                            @*<div class="form-group row">
+                                    <label for="CreatedDate" class="col-sm-3 col-form-label">CreatedDate</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="CreatedDate" placeholder="CreatedDate">
+                                    </div>
+                                </div>*@
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <input type='file' id="ImageUrl" />
+                                    <div id="imgalign"></div>
+                                    <img id="blah" src="#" alt="" height="200" width="200" />
+                                    @*<img src="" class="img-fluid" id="ImageUrl" alt="">
+                                        <input type="file" id="ChooseImageFile" class="upld-file">*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-7 text-center">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="chkKeepInfoAndAutoSave">
+                                <label class="form-check-label" for="chkKeepInfoAndAutoSave">Keep information and auto save</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-5"></div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-sm-3 text-left">
+                        <button type="button" class="btn btn-primary" id="btnClearInfo" onclick="clearTextBox();">Clear Info</button>
+                    </div>
+                    <div class="col-sm-4">
+                        @*<button type="button" class="btn btn-primary" id="btnAdd" onclick="return Insert();">Insert</button>
+                            <button type="button" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="Update();">Update</button>*@
+                        <button type="button" class="btn btn-primary" id="btnSave" onclick="SaveTool();">Save</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                    <div class="col-sm-5">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<script src="~/Scripts/jquery-3.0.0.min.js"></script>*@
+<script src="~/Scripts/Common/SM_Common.js"></script>
+<script src="~/Scripts/ToolList/ToolList1.js?v=@DateTime.Now.ToString("yyMMddHHssmm")"></script>
+
+

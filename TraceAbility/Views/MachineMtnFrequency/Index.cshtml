@@ -1,0 +1,157 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<section class="content">
+    <!-- Display grid, CRUD button -->
+    <div class="row" style="overflow-x: scroll;">
+        <div class="col-xs-12">
+            <h2>Machine Frequence</h2>
+            <div class="form-group row">
+                <label for="Machine Type" class="col-md-1 col-form-label">Machine Type</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" id="ID" placeholder="MachineID">
+                </div>
+                @*<label for="MachineName" class="col-md-1 col-form-label">Machine Name</label>
+                <div class="col-md-2">
+                    <input type="text" class="form-control" id="MachineName" placeholder="MachineName">
+                </div>*@
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="clearTextBox();">Add New Machine Frequence</button><br /><br />
+                </div>
+            </div>
+            
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr  class="bg-light-blue color-palette text-center">
+                        <th>
+                            MachineID
+                        </th>
+                        <th>
+                            Daily
+                        </th>
+                        <th>
+                            Weekly
+                        </th>
+                        <th>
+                            Monthly
+                        </th>
+                        <th>
+                            3 months
+                        </th>
+                        <th>
+                            6 months
+                        </th>
+                        <th>
+                            Yearly
+                        </th>
+                        <th>
+                            Action
+                        </th>
+                    </tr>
+
+                </thead>
+                <tbody class="tbody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" style="width:60%">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"></button>
+                    <h4 class="modal-title" id="myModalLabel">Add new Machine Frequence</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group row">
+                                    <label for="MachineId" class="col-sm-3 col-form-label">Machine Id</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control" id="MachineId" placeholder="MachineId">
+                                    </div>
+                                    @*<div class="col-sm-4">
+                                        <input type="text" class="form-control" id="MachineName" placeholder="MachineName">
+                                    </div>*@
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">Tần xuất bảo dưỡng</label>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-2">
+                                    </div>
+                                    <div class="col-md-5">                                       
+                                        <input type="checkbox" name="vehicle1" id="Daily" value="1"> Bảo dưỡng hàng ngày<br>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <input type="checkbox" name="vehicle1" id="3Months" value="4"> Bảo dưỡng 3 tháng<br>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-2">
+                                    </div>
+                                    <div class="col-md-5">
+                                        <input type="checkbox" name="vehicle1" id="Weekly" value="2"> Bảo dưỡng hàng tuần<br>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <input type="checkbox" name="vehicle1" id="6Months" value="5"> Bảo dưỡng 6 tháng<br>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-2">
+                                    </div>
+                                    <div class="col-md-5">
+                                        <input type="checkbox" name="vehicle1" id="Monthly" value="3"> Bảo dưỡng hàng tháng<br>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <input type="checkbox" name="vehicle1" id="Yearly" value="6"> Bảo dưỡng hàng năm<br>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-2">
+                                    </div>
+                                    <label for="ReceiveDate" class="col-sm-3 col-form-label">Chọn file format bảo dưỡng</label>
+                                    <div class="col-sm-4">
+                                        <input type="file" id="ChooseFile" class="upld-file">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btnAdd" onclick="return InsertMachineMtnFrequencyList();">Save</button>
+                    @*<button type="button" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="UpdateMachine();">Update</button>*@
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+@*<script src="~/Scripts/jquery-3.0.0.min.js"></script>*@
+<script src="~/Scripts/Common/SM_Common.js"></script>
+<script src="~/Scripts/MachineMtnFrequency/MachineMtnFrequency.js?v=@DateTime.Now.ToString("yyMMddHHssmm")"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

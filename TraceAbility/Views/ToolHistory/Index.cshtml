@@ -1,0 +1,230 @@
+﻿@{
+    ViewBag.Title = "Index";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="content">
+    <style>
+        .row {
+            margin: 0px;
+            padding: 0px;
+        }
+    </style>
+    <!-- Display grid, CRUD button -->
+    <form class="form-horizontal">
+        <div class="row">
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <h2>Select Searching Information</h2>
+                </div>
+                <div class="col-md-6 form-group" style="margin-top: 10px;">
+                    <div class="col-md-4">
+                        <label><input type="checkbox" value="">From Date</label>
+                        <input class="datepicker form-control" id="FromDate" data-date-format="mm/dd/yyyy" data-provide="datepicker">
+                    </div>
+                    <div class="col-md-4">
+                        <label><input type="checkbox" value="">To Date</label>
+                        <input class="datepicker form-control" id="ToDate" data-date-format="mm/dd/yyyy" data-provide="datepicker">
+                    </div>
+                    <div class="col-md-4">
+                        <label><input type="checkbox" value="">Expire Date</label>
+                        <input class="datepicker form-control" id="ExpireDate" data-date-format="mm/dd/yyyy" data-provide="datepicker">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 form-group">
+                    <div class="col-md-3">
+                        <label for="ToolID" class="col-sm-3 col-form-label">ToolID</label>
+                        <input type="text" class="form-control" id="ToolID" placeholder="ToolID">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="Item" class="col-sm-3 col-form-label">Item</label>
+                        <input type="text" class="form-control" id="Item" placeholder="Item">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="Line" class="col-sm-3 col-form-label">Line</label>
+                        <input type="text" class="form-control" id="Line" placeholder="Line">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="Maker" class="col-sm-3 col-form-label">Maker</label>
+                        <input type="text" class="form-control" id="Maker" placeholder="Maker">
+                    </div>
+                </div>
+                <div class="col-md-4 form-group modal-footer" style="margin-top:8px;">
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-primary" style="width : 130px;" id="btnSearch" onclick="return Search();">Search</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-primary" id="btnClearSearchItem" onclick="return ClearSearchItem();">Clear Search Item</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <h3 style="border-bottom: #000 1px solid;">General Information</h3>
+                <div>
+                    <div class="col-md-6" style="margin-right:0px">
+                        <div class="col-md-5">
+                            <label for="ToolId" class="col-form-label">ToolId</label>
+                            <input type="text" class="form-control" id="ToolId" placeholder="ToolId">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="Line" class="col-form-label">Line</label>
+                            <input type="text" class="form-control" id="Line" placeholder="Line">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="Status" class="col-form-label">Status</label>
+                            <input type="text" class="form-control" id="Status" placeholder="Status">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-3">
+                            <label for="ItemName" class="col-form-label">Item Name</label>
+                            <input type="text" class="form-control" id="ItemName" placeholder="ItemName">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="ItemCode" class="col-form-label">Item Code</label>
+                            <input type="text" class="form-control" id="ItemCode" placeholder="ItemCode">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="Maker" class="col-form-label">Maker</label>
+                            <input type="text" class="form-control" id="Maker" placeholder="Maker">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="Specification" class="col-form-label">Specification</label>
+                            <input type="text" class="form-control" id="Specification" placeholder="Specification">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="col-md-6">
+                        <div class="col-md-5">
+                            <label for="ExpireDate" class="col-form-label">ReceiveDate</label>
+                            <input class="datepicker form-control" id="ReceiveDate" data-date-format="mm/dd/yyyy" data-provide="datepicker">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="StartUsing" class="col-form-label">Start Using</label>
+                            <input type="text" class="form-control" id="StartUsing" placeholder="StartUsing">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="LifeTime" class="col-form-label">LifeTime</label>
+                            <input type="text" class="form-control" id="LifeTime" placeholder="LifeTime">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-3">
+                            <label for="ExpireDate" class="col-form-label">ExpireDate</label>
+                            <input class="datepicker form-control" id="ExpireDate" data-date-format="mm/dd/yyyy" data-provide="datepicker">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="RegisterID" class="col-form-label">Register_ID</label>
+                            <input type="text" class="form-control" id="RegisterID" placeholder="RegisterID">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="RegisterName" class="col-form-label">Register Name</label>
+                            <input type="text" class="form-control" id="RegisterName" placeholder="RegisterName">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="Remark" class="col-form-label">Remark</label>
+                            <input type="text" class="form-control" id="Remark" placeholder="Remark">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <h3 style="border-bottom: #000 1px solid;">Cleaning Information</h3>
+                <div>
+                    <div class="col-md-6">
+                        <div class="col-md-5">
+                            <label for="ExpireDate" class="col-form-label">CleaningDate</label>
+                            <input class="datepicker form-control" id="ReceiveDate" data-date-format="mm/dd/yyyy" data-provide="datepicker">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="Line" class="col-form-label">Line Using</label>
+                            <input type="text" class="form-control" id="Line" placeholder="Line">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="Status" class="col-form-label">Shift</label>
+                            <input type="text" class="form-control" id="Status" placeholder="Status">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-3">
+                            <label for="ItemName" class="col-form-label">CleaningContent</label>
+                            <input type="text" class="form-control" id="ItemName" placeholder="ItemName">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="ItemCode" class="col-form-label">Result</label>
+                            <input type="text" class="form-control" id="ItemCode" placeholder="ItemCode">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="Maker" class="col-form-label">OperationID</label>
+                            <input type="text" class="form-control" id="Maker" placeholder="Maker">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="Specification" class="col-form-label">OperationName</label>
+                            <input type="text" class="form-control" id="Specification" placeholder="Specification">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="col-md-5">
+                            <label for="ExpireDate" class="col-form-label">RepairDate</label>
+                            <input class="datepicker form-control" id="ReceiveDate" data-date-format="mm/dd/yyyy" data-provide="datepicker">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="StartUsing" class="col-form-label">NG Contents</label>
+                            <input type="text" class="form-control" id="StartUsing" placeholder="StartUsing">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="LifeTime" class="col-form-label">RepairContents</label>
+                            <input type="text" class="form-control" id="LifeTime" placeholder="LifeTime">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-3">
+                            <label for="ExpireDate" class="col-form-label">RepairID</label>
+                            <input class="datepicker form-control" id="ExpireDate" data-date-format="mm/dd/yyyy" data-provide="datepicker">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="RegisterID" class="col-form-label">RepairName</label>
+                            <input type="text" class="form-control" id="RegisterID" placeholder="RegisterID">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="RegisterName" class="col-form-label">CheckBy</label>
+                            <input type="text" class="form-control" id="RegisterName" placeholder="RegisterName">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="Remark" class="col-form-label">Name</label>
+                            <input type="text" class="form-control" id="Remark" placeholder="Remark">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <h3 style="border-bottom: #000 1px solid;">Discard Information</h3>
+                
+                <div class="col-md-8">
+                    <div class="col-md-4">
+                        <label for="ExpireDate" class="col-form-label">DiscardDate</label>
+                        <input class="datepicker form-control" id="ReceiveDate" data-date-format="mm/dd/yyyy" data-provide="datepicker">
+                    </div>
+                    <div class="col-md-8">
+                        <label for="Line" class="col-form-label">Discard Reason</label>
+                        <input type="text" class="form-control" id="Line" placeholder="Line">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="col-md-6">
+                        <label for="Status" class="col-form-label">DiscardID</label>
+                        <input type="text" class="form-control" id="Status" placeholder="Status">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Status" class="col-form-label">DiscardName</label>
+                        <input type="text" class="form-control" id="Status" placeholder="Status">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>

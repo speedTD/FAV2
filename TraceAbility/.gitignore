@@ -1,0 +1,9 @@
+v14/
+node_modules/
+packages/
+obj/
+bin/
+.vs/
+*.tmp
+Backup/*.sln
+Backup/*.suo

@@ -1,0 +1,239 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="content">
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">First Piece Buyoff Checking</h3>
+            <div class="box-tools pull-right">
+                <a type="button" class="btn btn-primary" href="/FPBChecking/Add">
+                    <i class="fa fa-plus"></i>
+                    <span>Add New</span>
+                </a>
+            </div>
+        </div>
+        <div class="box-body">
+            <!--search -->
+            <div class="row">
+                <div class="col-xs-6 col-sm-3 col-lg-2">
+                    <div class="form-group">
+                        <label for="SearchMachineID">MachineID</label>
+                        <input type="text" class="form-control" id="SearchMachineID" placeholder="SearchMachineID">
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-3 col-lg-2">
+                    <div class="form-group">
+                        <label for="SearchFPBCheckingDate">Checking Date</label>
+                        <input class="datepicker form-control" id="SearchFPBCheckingDate" data-date-format="mm/dd/yyyy" data-provide="datepicker" placeholder="SearchFPBCheckingDate">
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-3 col-lg-2">
+                    <div class="form-group">
+                        @*<div class="col-md-2">*@
+                        <label for="SearchResult">Result</label><br />
+                        <label class="radio-inline"><input type="radio" name="SearchResult" value="OK">OK</label>
+                        <label class="radio-inline"><input type="radio" name="SearchResult" value="NG">NG</label>
+                        @*</div>*@
+
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-3 col-lg-2">
+                    <div class="form-group">
+                        <label for="btnSearch">&nbsp;</label>
+                        <button type="button" class="btn btn-primary form-control" id="btnSearch" onclick="return FPBChecking_Search(1);">Search</button>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-3 col-lg-2">
+                    <div class="form-group">
+                        <label for="btnClearSearchItem">&nbsp;</label>
+                        <button type="button" class="btn btn-primary form-control" id="btnClearSearchItem" onclick="return clearTextBox();">Clear Search</button>
+                    </div>
+                </div>
+            </div>
+
+            <!--table -->
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 col-xs-12">
+                    <div class="table-responsive no-padding">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr class="bg-light-blue color-palette text-center">
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        IndicationNo
+                                    </th>
+                                    <th>
+                                        FPBCheckingDate
+                                    </th>
+                                    <th>
+                                        ItemName
+                                    </th>
+                                    <th>
+                                        ItemCode
+                                    </th>
+                                    <th>
+                                        BatchNo
+                                    </th>
+                                    <th>
+                                        MachineID
+                                    </th>
+                                    <th>
+                                        MachineName
+                                    </th>
+                                    <th>
+                                        UserID
+                                    </th>
+                                    <th>
+                                        SeqNo
+                                    </th>
+                                    <th>
+                                        BlockID
+                                    </th>
+                                    <th>
+                                        Result
+                                    </th>
+                                    <th>
+                                        ResultContent
+                                    </th>
+                                    <th>
+                                        Action
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 text-center" id="page-selection">
+                    </div>
+                </div>
+
+               
+            </div>
+        </div>
+    </div>
+</section>
+
+ <!-- Modal -->
+<div class="modal fade" id="myView" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"></button>
+                <h4 class="modal-title" id="myModalLabel">Detail FPBChecking</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="IndicationNo" class="col-sm-7 col-form-label">Work Order Indication No</label>
+                                <div class="col-sm-4">
+                                    <p class="IndicationNo"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="FPBCheckingDate" class="col-sm-5 col-form-label">Date Time</label>
+                                <div class="col-sm-7">
+                                    <p class="FPBCheckingDate"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="ItemCode" class="col-sm-7 col-form-label">Item Code</label>
+                            <div class="col-sm-4">
+                                <p class="ItemCode"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="ItemName" class="col-sm-7 col-form-label">Item Name</label>
+                            <div class="col-sm-4">
+                                <p class="ItemName"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="BatchNo" class="col-sm-7 col-form-label">Batch No</label>
+                            <div class="col-sm-4">
+                                <p class="BatchNo"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+                <div class="row" style="border-top: #000 2px solid; margin: 0px 20px 20px 20px;"></div>
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-md-5">
+                        <div class="form-group row">
+                            <label for="MachineID" class="col-md-5 col-form-label">Machine ID</label>
+                            <div class="col-md-7">
+                                <p class="MachineID"></p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="MachineName" class="col-md-5 col-form-label">Machine Name</label>
+                            <div class="col-md-7">
+                                <p class="MachineName"></p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="BlockID" class="col-md-5 col-form-label">BlockID</label>
+                            <div class="col-md-7">
+                                <p class="MachineName"></p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="UserID" class="col-md-5 col-form-label">UserID</label>
+                            <div class="col-md-7">
+                                <p class="UserID"></p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="SeqNo" class="col-md-5 col-form-label">Seq No.</label>
+                            <div class="col-md-7">
+                                <p class="SeqNo"></p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="Result" class="col-md-5 col-form-label">Result</label>
+                            <div class="col-md-7">
+                                <p class="Result"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-5">
+                        <p>Description</p>
+                        <div id="imgalign">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/Common/SM_Common.js"></script>
+
+<script src="~/Scripts/FPBChecking/FPBChecking.js?v=@DateTime.Now.ToString("yyMMddHHssmm")"></script>
