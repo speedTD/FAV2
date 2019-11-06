@@ -6,6 +6,10 @@ using System.Web;
 using System.Web.Mvc;
 using TestABC.Models.FPBChecking;
 using TestABC.Models.Data;
+using System.Drawing.Drawing2D;
+using System.Drawing;
+using System.Drawing.Imaging;
+using ImageResizer;
 
 namespace TestABC.Controllers
 {
@@ -76,15 +80,29 @@ namespace TestABC.Controllers
                     string extension = Path.GetExtension(httpFiles[i].FileName);
 
                     fileName = fileName + DateTime.Now.ToString("yyMMddHHmmss") + extension;
-                    request[i] = path + fileName;
+                    var xx= fileName + DateTime.Now.ToString("yyMMddHHmmss") + extension;
+                    request[i] = path + DateTime.Now.ToString("YYYYMMDD") + fileName;
                     fileName = Path.Combine(Server.MapPath(path), fileName);
+                    //duy add
+                    //  Stream strm = httpFiles[i].InputStream;
+                    //   Compressimage(strm, fileName, xx);
+                    // duy end
+                 
                     httpFiles[i].SaveAs(fileName);
+                    ResizeImage(fileName, extension);
                     FPBCheckingDetail.Images = request[i];
                     returnFPBCheckingDetail= FPBCheckingDetailDB.Insert(FPBCheckingDetail);                   
                 }
                 //FPBCheckingDetail.Images = JsonConvert.SerializeObject(request);
             }
             return Json(returnFPBCheckingDetail, JsonRequestBehavior.AllowGet);
+        }
+
+        public void ResizeImage(String path, String extension) {
+            ResizeSettings resizeSetting = new ResizeSettings {
+                Width = 1024, Height = 768, Format = extension,
+            };
+            ImageBuilder.Current.Build(path, path, resizeSetting);
         }
         public JsonResult List()
         {
@@ -119,6 +137,7 @@ namespace TestABC.Controllers
         }
         public JsonResult FPBCheckingDetail_DeletebyID(int ID)
         {
+
             return Json(FPBCheckingDetailDB.DeleteByID(ID), JsonRequestBehavior.AllowGet);
         }
         private PermisionControllerVM getPermisionControllerViewModel()

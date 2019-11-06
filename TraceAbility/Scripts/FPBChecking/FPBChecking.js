@@ -239,41 +239,35 @@ function validate() {
 
     return isValid;
 }
-
-
-
 var listImage = [];
-
-
 $("#Images").on('input', function (e) {
     // listImage = [];
     chindex = 0;
     var myfiles = document.getElementById("Images").files;
     var viewImages = document.getElementById("viewImages");
-
     var imageType = /image.*/;
-
     var html = '';
     var temp = listImage.length;
-    debugger;
-
+    let resizedImage;
     if (myfiles.length > 0) {
             for (i = 0; i < myfiles.length; i++) {
                 listImage.push(myfiles.item(i));
                 if (myfiles[i].type.match(imageType)) {   //image file.
                     var reader = new FileReader();
                     reader.onload = function (event) {
-                        var tagA = document.createElement("a");
+                        let tagA = document.createElement("a");
                         tagA.href = event.target.result;
-                        var image = new Image();
+                        let image = new Image();
                         image.onload = function () {
                             console.debug(this.width, this.height);
-                            var canvas = document.createElement('canvas'), ctx;
+                            let canvas = document.createElement('canvas'), ctx;
                             canvas.width = 188;
                             canvas.height = 150;
                             document.body.appendChild(canvas);
                             ctx = canvas.getContext('2d');
-                            ctx.drawImage(image, 0, 0, 188, 150);
+                            //ctx.drawImage(image, 0, 0, 188, 150);
+
+                            resizedImage = canvas.toDataURL("image/jpg");
                         };
                         image.src = event.target.result;
                         //add new
@@ -311,8 +305,6 @@ $("#Images").on('input', function (e) {
             viewImages.innerHTML = "";
         };
     }, 800);
-   
-    
 });
 
 function CheckFile() {

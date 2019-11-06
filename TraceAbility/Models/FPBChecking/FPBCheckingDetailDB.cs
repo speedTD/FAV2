@@ -5,12 +5,14 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using TestABC.Common;
-
 using log4net;
+using System.IO;
+
 namespace TestABC.Models.Data
 {
     public class FPBCheckingDetailDB
     {
+        
         private static readonly ILog mylog4net = LogManager.GetLogger(typeof(FPBCheckingDetailDB));
         public ReturnFPBCheckingDetail Insert(FPBCheckingDetail FPBCheckingDetail)
         {
@@ -169,7 +171,7 @@ namespace TestABC.Models.Data
         }
 
         public ReturnFPBCheckingDetail DeleteByID(int ID)
-        {
+        {   Del_Image_Server(ID);
             ReturnFPBCheckingDetail returnFPBCheckingDetail = new ReturnFPBCheckingDetail();
             try
             {
@@ -197,5 +199,43 @@ namespace TestABC.Models.Data
             }
             return returnFPBCheckingDetail;
         }
-    }
+
+        public void Del_Image_Server(int ID)
+        {
+            using (SqlConnection sqlConnection = ConnectSQLCommon.CreateAndOpenSqlConnection())
+            {
+                using (SqlCommand cmd = new SqlCommand("", sqlConnection))
+                {
+                    cmd.CommandText = "sp_FPBCheckingDetail_loadByID";
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@ID", SqlDbType.Int)).Value = ID;
+                    using (SqlDataReader sqlDr = ConnectSQLCommon.ExecuteDataReader(cmd, sqlConnection))
+                    {
+                       if (sqlDr.HasRows)
+                        {
+                           while (sqlDr.Read())
+                           {
+                                //Xóa file Trên Sever
+                                FPBCheckingDetail FPBCheckingDetail = new FPBCheckingDetail();
+                                FPBCheckingDetail.Images = sqlDr["Images"].ToString();
+                                try
+                                {
+                                 //var imgLink = FPBCheckingDetail.Images.Replace("~","");
+                                 File.Delete(System.Web.HttpContext.Current.Server.MapPath(FPBCheckingDetail.Images));
+                                }
+                                catch (Exception ex)
+                                {
+                                    // delete file failed
+                                }
+
+                            }
+                        }
+                    }
+                }
+               }
+
+            }
+        }
+    
+
 }
